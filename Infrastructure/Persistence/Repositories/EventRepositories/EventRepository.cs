@@ -35,6 +35,14 @@ namespace Persistence.Repositories.EventRepositories
 
         }
 
+        public async Task<List<Event>> GetAllEventByUserId(int userId)
+        {
+            return await _context.EventsAndUsers
+                .Where(x => x.DeletedDate == null && x.UserId == userId)
+                .Include(x => x.Event)
+                .Select(x => x.Event)
+                .ToListAsync();
+        }
 
         public async Task<Event> GetEventById(int id)
         {

@@ -36,7 +36,8 @@ namespace Application.Features.Mediatr.Users.Handlers.Write
             {
                 throw new Exception(Messages<User>.EntityAlreadyDeleted);
             }
-            throw new Exception(Messages<User>.EntityNotFound);
+            else
+                throw new Exception(Messages<User>.EntityNotFound);
         }
     }
 }

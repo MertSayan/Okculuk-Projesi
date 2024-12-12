@@ -27,7 +27,8 @@ namespace Application.Features.Mediatr.EventUsers.Handlers.Write
             {
                 await _eventUserRepository.RemoveUserAsync(eventUser);
             }
-            throw new Exception(Messages<EventUser>.EntityNotFound);
+            else
+                throw new Exception(Messages<EventUser>.EntityNotFound);
         }
     }
 }

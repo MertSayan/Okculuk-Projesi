@@ -22,7 +22,7 @@ namespace Application.Features.Mediatr.Events.Handlers.Read
         public async Task<GetEventByIdQueryResult> Handle(GetEventByIdQuery request, CancellationToken cancellationToken)
         {
             var eventt=await _eventRepository.GetEventById(request.Id);
-            if(eventt!=null)
+            if (eventt != null)
             {
                 return new GetEventByIdQueryResult
                 {
@@ -30,12 +30,14 @@ namespace Application.Features.Mediatr.Events.Handlers.Read
                     Description = eventt.Description,
                     EventId = eventt.EventId,
                     IsActive = eventt.IsActive,
-                    DateAndTime=eventt.DateAndTime,
+                    DateAndTime = eventt.DateAndTime,
                     Title = eventt.Title,
-                    UserName = eventt.User.Name+" "+eventt.User.Surname
+                    UserName = eventt.User.Name + " " + eventt.User.Surname
                 };
             }
-            return null;
+            else
+                return null;
+                
         }
     }
 }

@@ -28,7 +28,8 @@ namespace Application.Features.Mediatr.Roles.Handlers.Write
                 role.RoleName=request.RoleName;
                 await _roleRepository.UpdateRole(role);
             }
-            throw new Exception(Messages<Rol>.EntityNotFound);
+            else
+                throw new Exception(Messages<Rol>.EntityNotFound);
         }
     }
 }

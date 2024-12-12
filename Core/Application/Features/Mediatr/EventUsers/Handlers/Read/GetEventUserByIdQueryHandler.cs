@@ -24,11 +24,12 @@ namespace Application.Features.Mediatr.EventUsers.Handlers.Read
                     BasvuruZamanı=eventUser.BasvuruZamanı,
                     EventTitle=eventUser.Event.Title,
                     UserName=eventUser.User.Name+" "+eventUser.User.Surname,
-                    EventUserId=eventUser.UserId,
+                    EventUserId=eventUser.EventUserId,
                     Status=eventUser.Status,
                 };
             }
-            return null;
+            else
+                return null;
         }
     }
 }

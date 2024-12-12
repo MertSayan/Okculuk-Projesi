@@ -28,7 +28,8 @@ namespace Application.Features.Mediatr.Roles.Handlers.Write
             {
                 await _roleRepository.DeleteRole(role);
             }
-            throw new Exception(Messages<Rol>.EntityNotFound);
+            else
+                throw new Exception(Messages<Rol>.EntityNotFound);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Application.Features.Mediatr.Users.Results;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace Application.Interfaces.UserInterface
         Task CreateUserAsync(User user);
         Task RemoveUserAsync(User user);
         Task UpdateUserAsync(User user);
+
+        Task<List<GetAllUserByEventUserIdQueryResult>> GetAllUserByEventUserId(int eventId);
 
     }
 }

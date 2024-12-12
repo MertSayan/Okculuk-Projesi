@@ -1,4 +1,5 @@
 ﻿using Application.Constants;
+using Application.Features.Mediatr.Users.Results;
 using Application.Interfaces.UserInterface;
 using Domain;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,24 @@ namespace Persistence.Repositories.UserRepositories
                 .Where(x => x.DeletedDate == null)
                 .Include(x=>x.Role)
                 .ToListAsync();
+        }
+
+        public async Task<List<GetAllUserByEventUserIdQueryResult>> GetAllUserByEventUserId(int eventId)
+        {
+            return await _context.EventsAndUsers
+                 .Where(x=>x.EventId == eventId && x.DeletedDate==null)
+                 .Include(x=>x.User)
+                 .ThenInclude(x=>x.Role)
+                 .Select(x=> new GetAllUserByEventUserIdQueryResult
+                 {
+                     UserId = x.UserId,
+                     Email=x.User.Email,
+                     Surname=x.User.Surname,
+                     Name=x.User.Name,
+                     PhoneNumber=x.User.PhoneNumber,
+                     RoleName=x.User.Role.RoleName
+                 }).ToListAsync();
+                 
         }
 
         public async Task<User> GetUserById(int id)

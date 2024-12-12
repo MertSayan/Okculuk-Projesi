@@ -33,7 +33,8 @@ namespace Application.Features.Mediatr.Events.Handlers.Write
 
                 await _eventRepository.UpdateEventAsync(eventt);
             }
-            throw new Exception(Messages<Event>.EntityNotFound);
+            else
+                throw new Exception(Messages<Event>.EntityNotFound);
         }
     }
 }

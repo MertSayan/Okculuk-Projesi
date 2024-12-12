@@ -35,7 +35,8 @@ namespace Application.Features.Mediatr.Users.Handlers.Read
                     Password = user.Password,
                 };
             }
-            return null;
+            else
+                return null;
         }
     }
 }

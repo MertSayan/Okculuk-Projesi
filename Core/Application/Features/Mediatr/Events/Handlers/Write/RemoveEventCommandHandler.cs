@@ -27,7 +27,8 @@ namespace Application.Features.Mediatr.Events.Handlers.Write
             {
                 await _eventRepository.RemoveEventAsync(eventt);
             }
-            throw new Exception(Messages<Event>.EntityNotFound);
+            else
+                throw new Exception(Messages<Event>.EntityNotFound);
         }
     }
 }

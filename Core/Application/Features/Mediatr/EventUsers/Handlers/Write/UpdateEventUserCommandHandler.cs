@@ -28,7 +28,8 @@ namespace Application.Features.Mediatr.EventUsers.Handlers.Write
                 eventUser.Status=request.Status;
                 await _eventUserRepository.UpdateUserAsync(eventUser);
             }
-            throw new Exception(Messages<Event>.EntityNotFound);
+            else
+                throw new Exception(Messages<Event>.EntityNotFound);
         }
     }
 }

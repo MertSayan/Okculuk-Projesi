@@ -31,6 +31,12 @@ namespace WebApi.Controllers
             var values = await _mediator.Send(new GetEventByIdQuery(id));
             return Ok(values);
         }
+        [HttpGet("GetAllEventByUserId")]
+        public async Task<IActionResult> GetAllEventByUserId(int userId)
+        {
+            var values = await _mediator.Send(new GetAllEventByUserIdQuery(userId));
+            return Ok(values);
+        }
         [HttpPost]
         public async Task<IActionResult> CreateEvent(CreateEventCommand command)
         {

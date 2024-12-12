@@ -30,7 +30,8 @@ namespace Application.Features.Mediatr.Roles.Handlers.Read
                     RoleName = role.RoleName,
                 };
             }
-            return null;
+            else
+                return null;
             
         }
     }

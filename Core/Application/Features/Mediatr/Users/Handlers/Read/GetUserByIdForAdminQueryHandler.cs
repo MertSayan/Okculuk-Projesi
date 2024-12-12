@@ -34,7 +34,8 @@ namespace Application.Features.Mediatr.Users.Handlers.Read
                     UserId = user.UserId
                 };
             }
-            return null;
+            else
+                return null;
             
         }
     }

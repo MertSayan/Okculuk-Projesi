@@ -14,5 +14,7 @@ namespace Application.Interfaces.EventInterface
         Task CreateEventAsync(Event eventt);
         Task RemoveEventAsync(Event eventt);
         Task UpdateEventAsync(Event eventt);
+
+        Task<List<Event>> GetAllEventByUserId(int userId);
     }
 }

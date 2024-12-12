@@ -3,7 +3,6 @@ using Application.Features.Mediatr.Users.Commands;
 using Application.Features.Mediatr.Users.Queries;
 using Domain;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
@@ -38,6 +37,13 @@ namespace WebApi.Controllers
             var values = await _mediator.Send(new GetUserByIdForAdminQuery(id));
             return Ok(values);
         }
+
+        [HttpGet("GetAllUserByEventId")]
+        public async Task<IActionResult> GetAllUserByEventId(int eventId)
+        {
+            var values = await _mediator.Send(new GetAllUserByEventUserIdQuery(eventId));
+            return Ok(values);
+        }
         [HttpPost]
         public async Task<IActionResult> CreateUser(CreateUserCommand command)
         {
@@ -47,6 +53,12 @@ namespace WebApi.Controllers
 
         [HttpPut]
         public async Task<IActionResult> UpdateUser(UpdateUserCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok(Messages<User>.EntityUpdated);
+        }
+        [HttpPut("UpdateForAdmin")]
+        public async Task<IActionResult> UpdateForAdmin(UpdateUserByAdminCommand command)
         {
             await _mediator.Send(command);
             return Ok(Messages<User>.EntityUpdated);

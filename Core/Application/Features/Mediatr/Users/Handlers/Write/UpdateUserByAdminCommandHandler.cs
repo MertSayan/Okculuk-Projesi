@@ -3,32 +3,29 @@ using Application.Features.Mediatr.Users.Commands;
 using Application.Interfaces.UserInterface;
 using Domain;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Mediatr.Users.Handlers.Write
 {
-    public class RemoveUserCommandHandler : IRequestHandler<RemoveUserCommand>
+    public class UpdateUserByAdminCommandHandler : IRequestHandler<UpdateUserByAdminCommand>
     {
         private readonly IUserRepository _userRepository;
 
-        public RemoveUserCommandHandler(IUserRepository userRepository)
+        public UpdateUserByAdminCommandHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
-        public async Task Handle(RemoveUserCommand request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateUserByAdminCommand request, CancellationToken cancellationToken)
         {
-            var user=await _userRepository.GetUserById(request.Id);
+            var user=await _userRepository.GetUserById(request.UserId);
             if (user != null)
             {
-                await _userRepository.RemoveUserAsync(user);
+                user.RolId = request.RoleId;
+                await _userRepository.UpdateUserAsync(user);
             }
             else
                 throw new Exception(Messages<User>.EntityNotFound);
+            
         }
     }
 }
