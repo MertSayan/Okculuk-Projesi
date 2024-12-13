@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+<div class="d-flex justify-content-center">
+    <div class="col-md-10">
+        <!-- İlk Row -->
+        <div class="row mb-3">
+            @await Component.InvokeAsync("_AdminUserDetailUserInformationComponentPartial", new { id = Convert.ToInt32(ViewBag.UserId) })
+        </div>
+
+        <!-- İkinci Row -->
+        <div class="row mb-3  justify-content-center">
+            <button class="btn btn-info back-button w-50 h-50" data-url="/Admin/AdminUser/Index/">
+                USER SAYFASINA GERİ DÖN
+            </button>
+        </div>
+
+        <!-- Üçüncü Row -->
+        <div class="row">
+            @await Component.InvokeAsync("_AdminUserDetailAcceptedRejectedEventsComponentPartial", new { id = Convert.ToInt32(ViewBag.UserId) })
+        </div>
+    </div>
+</div>

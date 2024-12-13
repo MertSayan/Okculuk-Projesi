@@ -1,0 +1,39 @@
+﻿@model AdminResultUserInformation
+<div>
+    <div class="card card-profile">
+        <div class="card-header" style="background-image: url('assets/img/blogpost.jpg')">
+            <div class="profile-picture">
+                <div class="avatar avatar-xl">
+                    <img src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="user-profile text-center">
+                <div class="name">@Model.Name</div>
+                <div class="job">@Model.RoleName</div>
+                <div class="desc">@Model.PhoneNumber</div>
+               
+                <div class="view-profile">
+                    <a href="#" class="btn btn-secondary w-100">View Full Profile</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row user-stats text-center">
+                <div class="col">
+                    <div class="number">125</div>
+                    <div class="title">Katıldığı etkinlikler</div>
+                </div>
+                <div class="col">
+                    <div class="number">25K</div>
+                    <div class="title">Reddettiği etkinlikler</div>
+                </div>
+                <div class="col">
+                    <div class="number">134</div>
+                    <div class="title">Cevap vermediği etkinlikler</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

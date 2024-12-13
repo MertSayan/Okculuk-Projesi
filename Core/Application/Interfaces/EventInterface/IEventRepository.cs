@@ -1,4 +1,5 @@
-﻿using Domain;
+﻿using Application.Features.Mediatr.Events.Results;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,6 @@ namespace Application.Interfaces.EventInterface
         Task RemoveEventAsync(Event eventt);
         Task UpdateEventAsync(Event eventt);
 
-        Task<List<Event>> GetAllEventByUserId(int userId);
+        Task<List<GetAllEventByUserIdQueryResult>> GetAllEventByUserId(int userId);
     }
 }

@@ -1,0 +1,12 @@
+﻿@model List<GetAllRoles>
+
+<div class="mb-3">
+    <label for="RoleId" class="form-label">Yeni Rol Seçimi</label>
+    <p>Rol değişikliği yapmayacaksanız lütfen bu seçeneği mevcut rol ile aynı değerde tutun</p>
+    <select  class="form-control" id="RoleId" name="RoleId">
+        @foreach (var role in Model)
+        {
+            <option value="@role.RoleId">@role.RoleName</option>
+        }
+    </select>
+</div>

@@ -1,4 +1,5 @@
 ﻿using Application.Constants;
+using Application.Features.Mediatr.Events.Results;
 using Application.Interfaces.EventInterface;
 using Domain;
 using Microsoft.EntityFrameworkCore;
@@ -35,12 +36,20 @@ namespace Persistence.Repositories.EventRepositories
 
         }
 
-        public async Task<List<Event>> GetAllEventByUserId(int userId)
+        public async Task<List<GetAllEventByUserIdQueryResult>> GetAllEventByUserId(int userId)
         {
             return await _context.EventsAndUsers
                 .Where(x => x.DeletedDate == null && x.UserId == userId)
                 .Include(x => x.Event)
-                .Select(x => x.Event)
+                .Select(x => new GetAllEventByUserIdQueryResult
+                {
+                   Title=x.Event.Title,
+                   Description=x.Event.Description,
+                   DateAndTime=x.Event.DateAndTime,
+                   EventId=x.Event.EventId,
+                   IsActive=x.Event.IsActive,
+                   Status = x.Status,
+                })
                 .ToListAsync();
         }
 

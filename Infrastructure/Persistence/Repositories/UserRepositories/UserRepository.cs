@@ -67,7 +67,30 @@ namespace Persistence.Repositories.UserRepositories
         {
             if (user.DeletedDate == null)
             {
-                user.DeletedDate= DateTime.Now;
+                // Kullanıcıyı soft delete yap
+                user.DeletedDate = DateTime.Now;
+
+                // İlişkili EventUser kayıtlarını soft delete yap
+                var relatedEventUsers = _context.EventsAndUsers.Where(eu => eu.UserId == user.UserId && eu.DeletedDate == null).ToList();
+                foreach (var eventUser in relatedEventUsers)
+                {
+                    eventUser.DeletedDate = DateTime.Now;
+                }
+
+                // Kullanıcının sahibi olduğu Event'leri soft delete yap
+                var relatedEvents = _context.Events.Where(e => e.UserId == user.UserId && e.DeletedDate == null).ToList();
+                foreach (var eventEntity in relatedEvents)
+                {
+                    eventEntity.DeletedDate = DateTime.Now;
+
+                    // Silinen etkinliğe bağlı EventUser kayıtlarını da soft delete yap
+                    var eventUsersForDeletedEvent = _context.EventsAndUsers.Where(eu => eu.EventId == eventEntity.EventId && eu.DeletedDate == null).ToList();
+                    foreach (var eventUser in eventUsersForDeletedEvent)
+                    {
+                        eventUser.DeletedDate = DateTime.Now;
+                    }
+                }
+
                 await _context.SaveChangesAsync();
             }
             else
@@ -75,6 +98,7 @@ namespace Persistence.Repositories.UserRepositories
                 throw new Exception(Messages<User>.EntityAlreadyDeleted);
             }
         }
+
 
         public async Task UpdateUserAsync(User user)
         {

@@ -29,15 +29,7 @@ namespace Application.Features.Mediatr.Events.Handlers.Read
             var user=await _userRepository.GetUserById(request.UserId);
             if (user != null)
             {
-                var events = await _eventRepository.GetAllEventByUserId(request.UserId);
-                return events.Select(x => new GetAllEventByUserIdQueryResult
-                {
-                    DateAndTime = x.DateAndTime,
-                    Description = x.Description,
-                    EventId = x.EventId,
-                    IsActive = x.IsActive,
-                    Title = x.Title,
-                }).ToList();
+                return await _eventRepository.GetAllEventByUserId(request.UserId);
             }
             else
                 throw new Exception(Messages<User>.EntityNotFound);

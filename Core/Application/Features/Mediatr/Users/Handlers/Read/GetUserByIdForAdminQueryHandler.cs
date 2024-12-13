@@ -30,6 +30,7 @@ namespace Application.Features.Mediatr.Users.Handlers.Read
                     Name = user.Name,
                     PhoneNumber = user.PhoneNumber,
                     RoleName = user.Role.RoleName,
+                    RoleId=user.Role.RoleId,
                     Surname = user.Surname,
                     UserId = user.UserId
                 };

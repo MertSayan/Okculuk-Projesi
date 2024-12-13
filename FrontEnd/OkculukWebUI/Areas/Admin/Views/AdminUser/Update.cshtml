@@ -1,0 +1,48 @@
+﻿@model AdminUpdateUser
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+
+<div class="container mt-5">
+    <h2 class="text-center">Kullanıcı Rol Güncelleme Sayfası</h2>
+    <form class="Index" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="UserId" />
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Adı</label>
+            <input asp-for="Name" class="form-control" placeholder="Adınızı giriniz" readonly />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Surname" class="form-label">Soyadı</label>
+            <input asp-for="Surname" class="form-control" placeholder="Soyadınızı giriniz" readonly />
+            <span asp-validation-for="Surname" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">Emaili</label>
+            <input asp-for="Email" class="form-control" placeholder="Email adresinizi giriniz" readonly />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="PhoneNumber" class="form-label">Telefon Numarası</label>
+            <input asp-for="PhoneNumber" class="form-control" placeholder="Telefon numaranızı giriniz" readonly />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="RoleName" class="form-label">Mevcut Rolü</label>
+            <input type="text" id="CurrentRole" class="form-control" value="@Model.RoleName" readonly />
+        </div>
+
+        @await Component.InvokeAsync("_AdminUpdateUserGetRolesComponentPartial")
+
+        <button type="submit" class="btn btn-primary w-100">Güncelle</button>
+    </form>
+</div>
+
+

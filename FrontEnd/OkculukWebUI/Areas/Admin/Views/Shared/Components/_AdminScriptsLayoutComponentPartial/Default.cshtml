@@ -1,0 +1,119 @@
+﻿<!--   Core JS Files   -->
+<script src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/js/core/jquery-3.7.1.min.js"></script>
+<script src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/js/core/popper.min.js"></script>
+<script src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/js/core/bootstrap.min.js"></script>
+
+<!-- jQuery Scrollbar -->
+<script src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+<!-- Chart JS -->
+<script src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/js/plugin/chart.js/chart.min.js"></script>
+
+<!-- jQuery Sparkline -->
+<script src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+<!-- Chart Circle -->
+<script src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/js/plugin/chart-circle/circles.min.js"></script>
+
+<!-- Datatables -->
+<script src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/js/plugin/datatables/datatables.min.js"></script>
+
+<!-- Bootstrap Notify -->
+<script src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+<!-- jQuery Vector Maps -->
+<script src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
+<script src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/js/plugin/jsvectormap/world.js"></script>
+
+<!-- Sweet Alert -->
+<script src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+<!-- Kaiadmin JS -->
+<script src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/js/kaiadmin.min.js"></script>
+
+<script>
+    // SweetAlert ile Silme İşlemi ve Yönlendirme
+    $(document).on('click', '.delete-button', function (e) {
+        e.preventDefault(); // Varsayılan tıklama davranışını engelle
+
+        var url = $(this).data('url'); // Butondaki hedef URL'yi al
+
+        swal({
+            title: "Emin Misin?",
+            text: "Bunu Geri Alamazsın!",
+            type: "Uyarı",
+            buttons: {
+                confirm: {
+                    text: "Evet, sil gitsin!",
+                    className: "btn btn-success",
+                },
+                cancel: {
+                    text: "Hayır, iptal et!",
+                    visible: true,
+                    className: "btn btn-danger",
+                },
+            },
+        }).then((willDelete) => {
+            if (willDelete) {
+                // Kullanıcı onay verdi, yönlendirme yap
+                window.location.href = url;
+            } else {
+                swal.close(); // SweetAlert'i kapat
+            }
+        });
+    });
+
+    $(document).on('click', '.update-button', function (e) {
+        e.preventDefault(); // Varsayılan tıklama davranışını engelle
+
+        var url = $(this).data('url'); // Butondaki hedef URL'yi al
+
+        swal({
+            title: "Emin Misin?",
+            text: "Güncelleme Yapılacak",
+            type: "Güncelleme İsteği",
+            buttons: {
+                confirm: {
+                    text: "Evet, güncelleme sayfasına git!",
+                    className: "btn btn-success",
+                },
+                cancel: {
+                    text: "Hayır, iptal et!",
+                    visible: true,
+                    className: "btn btn-danger",
+                },
+            },
+        }).then((willDelete) => {
+            if (willDelete) {
+                // Kullanıcı onay verdi, yönlendirme yap
+                window.location.href = url;
+            } else {
+                swal.close(); // SweetAlert'i kapat
+            }
+        });
+    });
+
+    $(document).on('click', '.detail-button', function (e) {
+        e.preventDefault(); // Varsayılan tıklama davranışını engelle
+
+        var url = $(this).data('url'); // Butondaki hedef URL'yi al
+
+        // Kullanıcıyı hedef URL'ye yönlendir
+        if (url) {
+            window.location.href = url;
+        }
+    });
+    $(document).on('click', '.back-button', function (e) {
+        e.preventDefault(); // Varsayılan tıklama davranışını engelle
+
+        var url = $(this).data('url'); // Butondaki hedef URL'yi al
+
+        // Kullanıcıyı hedef URL'ye yönlendir
+        if (url) {
+            window.location.href = url;
+        }
+    });
+
+
+</script>
+
