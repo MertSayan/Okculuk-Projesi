@@ -4,6 +4,7 @@ using Application.Interfaces.UserInterface;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
+using System.Linq.Expressions;
 
 namespace Persistence.Repositories.UserRepositories
 {
@@ -49,6 +50,14 @@ namespace Persistence.Repositories.UserRepositories
                      BasvuruZamani=x.BasvuruZamanı
                  }).ToListAsync();
                  
+        }
+
+        public async Task<User> GetByFilterAsync(Expression<Func<User, bool>> filter)
+        {
+            var user=await _context.Users.Where(filter)
+                .Include(x=>x.Role)
+                .FirstOrDefaultAsync();
+            return user;
         }
 
         public async Task<User> GetUserById(int id)

@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using OkculukDto.EventDtos;
+using System.Security.Claims;
 using System.Text;
 
 namespace OkculukWebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminEvent")]
+    [Authorize(Roles = "Admin")]
     public class AdminEventController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -72,6 +75,8 @@ namespace OkculukWebUI.Areas.Admin.Controllers
         [Route("Create")]
         public IActionResult Create()
         {
+            var createEventUserClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            ViewBag.createEventUserId = createEventUserClaim.Value;
             return View();
         }
 
@@ -79,7 +84,14 @@ namespace OkculukWebUI.Areas.Admin.Controllers
         [Route("Create")]
         public async Task<IActionResult> Create(AdminCreateEvent createEvent)
         {
-            //burası token işlemi yapıldıktan sonra halledilecek
+            var client = _httpClientFactory.CreateClient();
+            var jsonData=JsonConvert.SerializeObject(createEvent);
+            StringContent content=new StringContent(jsonData,Encoding.UTF8,"application/json");
+            var responseMessage = await client.PostAsync("https://localhost:7082/api/Events",content);
+            if(responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "AdminEvent", new { area = "Admin" });
+            }
             return View();
         }
 

@@ -1,0 +1,46 @@
+﻿@model AdminCreateEvent
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">Etkinlik Oluşturma Sayfası</h2>
+    <form class="Index" method="post">
+        <input type="hidden" asp-for="UserId" class="form-control" value="@ViewBag.createEventUserId" />
+        
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">Etkinlik Başlığı Giriniz</label>
+            <input asp-for="Title" class="form-control" placeholder="Etkinlik Başlığı Giriniz" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Etkinlik Açıklamasını Giriniz</label>
+            <input asp-for="Description" class="form-control" placeholder="Etkinlik Açıklamasını Giriniz" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="IsActive" class="form-label">Etkinlik Pasif mi Aktif mi Olacak Seçiniz</label>
+            <div class="form-check">
+                <input asp-for="IsActive" type="checkbox" class="form-check-input" id="IsActive" />
+                <label class="form-check-label" for="IsActive">Aktif</label>
+            </div>
+            <span asp-validation-for="IsActive" class="text-danger"></span>
+        </div>
+
+
+
+
+        <div class="mb-3">
+            <label asp-for="DateAndTime" class="form-label">Etkinliğin Tarihini ve Saatini Giriniz</label>
+            <input asp-for="DateAndTime" class="form-control" placeholder="Etkinliğin Tarihini ve Saatini Giriniz" />
+            <span asp-validation-for="DateAndTime" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Oluştur</button>
+    </form>
+</div>
+
+

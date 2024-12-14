@@ -4,12 +4,16 @@ using Application.Interfaces.EventUserInterface;
 using Application.Interfaces.RoleInterface;
 using Application.Interfaces.UserInterface;
 using Application.Services;
+using Application.Tools;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Persistence.Context;
 using Persistence.Repositories.EventRepositories;
 using Persistence.Repositories.EventUserRepositories;
 using Persistence.Repositories.RoleRepositories;
 using Persistence.Repositories.UserRepositories;
+using System.Text;
 
 namespace WebApi
 {
@@ -18,6 +22,21 @@ namespace WebApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+            {
+                opt.RequireHttpsMetadata = false; //çok tavsiye edilen biþey deðil ama þimdilik güvenliði biraz yumuþattýk.
+                opt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidAudience = JwtTokenDefaults.ValidAudience,
+                    ValidIssuer = JwtTokenDefaults.ValidIssuer,
+                    ClockSkew = TimeSpan.Zero,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtTokenDefaults.Key)),
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true
+                };
+            });
+
 
             // Add services to the container.
 

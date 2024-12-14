@@ -1,10 +1,6 @@
 ﻿using Application.Features.Mediatr.Users.Results;
 using Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace Application.Interfaces.UserInterface
 {
@@ -17,6 +13,10 @@ namespace Application.Interfaces.UserInterface
         Task UpdateUserAsync(User user);
 
         Task<List<GetAllUserByEventIdQueryResult>> GetAllUserByEventUserId(int eventId);
+
+        Task<User> GetByFilterAsync(Expression<Func<User, bool>> filter); //şimdilik login işlemi için kullanacağım
+        //tabiki bu kullanım filitre olduğu için farklı parametrelere göre de listeleyebilirim
+
 
     }
 }

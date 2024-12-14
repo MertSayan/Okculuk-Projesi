@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using OkculukDto.UserDtos;
 using System.Text;
@@ -7,6 +8,7 @@ namespace OkculukWebUI.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/AdminUser")]
+    [Authorize(Roles = "Admin")]
     public class AdminUserController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;

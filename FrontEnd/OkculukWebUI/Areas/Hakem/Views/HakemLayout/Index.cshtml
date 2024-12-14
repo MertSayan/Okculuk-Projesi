@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+@await Component.InvokeAsync("_HakemHeadLayoutComponentPartial")
+
+    <body>
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <!-- Sidebar -->
+            @await Component.InvokeAsync("_HakemSideBarLayoutComponentPartial")
+
+
+                <!-- Main Content -->
+                <div class="col py-3">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+    @await Component.InvokeAsync("_HakemFooterLayoutComponentPartial")
+
+
+        <!-- Scripts-->
+    @await Component.InvokeAsync("_HakemScriptsLayoutComponentPartial")
+
+    </body>
+</html>
