@@ -56,7 +56,7 @@ namespace OkculukWebUI.Controllers
                             IsPersistent=true
                         };
                         await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme,new ClaimsPrincipal(claimsIdentity),authProps);
-                        return RedirectToAction("Index", "Home"); // burayı daha sonra değiştirebilirim
+                        return RedirectToAction("Events", "Event", new {area="Hakem"}); // burayı daha sonra değiştirebilirim
                     }
                 }
             }

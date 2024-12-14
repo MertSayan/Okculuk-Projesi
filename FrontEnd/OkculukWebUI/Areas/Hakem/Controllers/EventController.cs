@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace OkculukWebUI.Areas.Hakem.Controllers
 {
     [Area("Hakem")]
-    [Route("Hakem/User")]
-    public class UserController : Controller
+    [Route("Hakem/Event")]
+    public class EventController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public UserController(IHttpClientFactory httpClientFactory)
+        public EventController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
@@ -22,9 +23,8 @@ namespace OkculukWebUI.Areas.Hakem.Controllers
         [Route("Events")]
         public async Task<IActionResult> Events()
         {
-            var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("");
-
+            var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            ViewBag.UserId = userIdClaim.Value;
             return View();
         }
     }

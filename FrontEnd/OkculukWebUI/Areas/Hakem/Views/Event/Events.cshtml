@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Events";
+    Layout = "~/Areas/Hakem/Views/HakemLayout/Index.cshtml";
+}
+
+<h1 class="text-center mt-3 mb-4">İlişkiniz Olan Tüm Etkinlikler</h1>
+
+<div class="container">
+    <div class="row gx-2 gy-4">
+        <!-- Cevap Verebileceğiniz Etkinlikler -->
+        <div class="col-md-4">
+            @await Component.InvokeAsync("_GetAvailableEventsComponentPartial", new { id = Convert.ToInt32(ViewBag.UserId) })
+        </div>
+
+        <!-- Kabul Edilen Etkinlikler -->
+        <div class="col-md-4">
+            @await Component.InvokeAsync("_GetAcceptedEventsComponentPartial", new { id = Convert.ToInt32(ViewBag.UserId) })
+        </div>
+        <!-- Red Edilen Etkinlikler-->
+        <div class="col-md-4">
+            @await Component.InvokeAsync("_GetRejectedEventsComponentPartial", new { id = Convert.ToInt32(ViewBag.UserId) })
+        </div>
+    </div>
+</div>

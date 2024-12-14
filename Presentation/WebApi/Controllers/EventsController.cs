@@ -1,5 +1,6 @@
 ﻿using Application.Constants;
 using Application.Features.Mediatr.Events.Commands;
+using Application.Features.Mediatr.Events.Handlers.Read;
 using Application.Features.Mediatr.Events.Queries;
 using Domain;
 using MediatR;
@@ -37,6 +38,21 @@ namespace WebApi.Controllers
             var values = await _mediator.Send(new GetAllEventByUserIdQuery(userId));
             return Ok(values);
         }
+        [HttpGet("GetAvailableEventsByUserId")]
+        public async Task<IActionResult> GetAvailableEventsByUserId(int userId)
+        {
+            var values = await _mediator.Send(new GetAvailableEventsForUserQuery(userId));
+            return Ok(values);
+        }
+        //[HttpGet("GetEventsByUserIdStatus/{userId}/{status}")]
+        [HttpGet("GetEventsByUserIdStatus")]
+        public async Task<IActionResult> GetEventsByUserIdStatus(int userId,string status)
+        {
+            var values = await _mediator.Send(new GetAllEventByUserIdStatusQuery(userId,status));
+            return Ok(values);
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> CreateEvent(CreateEventCommand command)
         {

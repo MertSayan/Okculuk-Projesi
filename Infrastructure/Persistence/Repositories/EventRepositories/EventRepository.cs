@@ -7,6 +7,7 @@ using Persistence.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,6 +54,23 @@ namespace Persistence.Repositories.EventRepositories
                 .ToListAsync();
         }
 
+        
+
+        public async Task<List<Event>> GetAvailableEventsForUserAsync(int userId)
+        {
+            // Kullanıcının daha önce katılma/kabul/red durumlarına göre filtreleme
+            var userEventIds = await _context.EventsAndUsers
+                .Where(eu => eu.DeletedDate == null && eu.UserId == userId)
+                .Select(eu => eu.EventId)
+                .ToListAsync();
+
+            return await _context.Events
+                .Where(e => e.DeletedDate == null && !userEventIds.Contains(e.EventId))
+                .Include(e => e.User)
+                .ToListAsync();
+        }
+
+
         public async Task<Event> GetEventById(int id)
         {
             var eventt=await _context.Events
@@ -65,6 +83,25 @@ namespace Persistence.Repositories.EventRepositories
             }
             return null;
         }
+
+        public async Task<List<GetAllEventByUserIdStatusQueryResult>> GetEventsByStatus(int userId, Expression<Func<EventUser, bool>> statusPredicate)
+        {
+            return await _context.EventsAndUsers
+                .Where(x => x.DeletedDate == null && x.UserId == userId)
+                .Where(statusPredicate) // Dinamik filtreleme
+                .Include(x => x.Event)  // Etkinlik detaylarını dahil et
+                .Select(x => new GetAllEventByUserIdStatusQueryResult
+                {
+                    Title = x.Event.Title,
+                    Description = x.Event.Description,
+                    DateAndTime = x.Event.DateAndTime,
+                    EventId = x.Event.EventId,
+                    IsActive = x.Event.IsActive,
+                    UserName=x.User.Name+" "+x.User.Surname,
+                })
+                .ToListAsync();
+        }
+
 
         public async Task RemoveEventAsync(Event eventt)
         {

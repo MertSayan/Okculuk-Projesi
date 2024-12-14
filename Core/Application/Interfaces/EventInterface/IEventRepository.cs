@@ -3,6 +3,7 @@ using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,5 +18,13 @@ namespace Application.Interfaces.EventInterface
         Task UpdateEventAsync(Event eventt);
 
         Task<List<GetAllEventByUserIdQueryResult>> GetAllEventByUserId(int userId);
+
+        Task<List<Event>> GetAvailableEventsForUserAsync(int userId);
+
+        Task<List<GetAllEventByUserIdStatusQueryResult>> GetEventsByStatus(int userId, Expression<Func<EventUser, bool>> statusPredicate);
+
+
+
+
     }
 }
