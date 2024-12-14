@@ -1,21 +1,30 @@
-﻿@model List<AdminResultAllEventByUserId>
+﻿@model List<AdminResultAllEvent>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Kullanıcının Cevapladığı Etkinlikler</h4>
+                <h4 class="card-title">Tüm Etkinlikler</h4>
             </div>
+            <button class="btn btn-success update-button" data-url="/Admin/AdminEvent/Create">
+                Yeni Etkinlik Oluştur
+            </button>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="basic-datatables" class="table table-hover">
+                    <table id="basic-datatables"
+                           class="display table table-hover">
                         <thead>
                             <tr>
                                 <th>EtkinlikId</th>
                                 <th>Başlık</th>
                                 <th>Açıklama</th>
                                 <th>Aktif Mi</th>
+                                <th>Oluşturan Kişi</th>
                                 <th>Tarih ve Saat</th>
-                                <th>Kabul Durumu</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -24,28 +33,36 @@
                                 <th>Başlık</th>
                                 <th>Açıklama</th>
                                 <th>Aktif Mi</th>
+                                <th>Oluşturan Kişi</th>
                                 <th>Tarih ve Saat</th>
-                                <th>Kabul Durumu</th>
                             </tr>
                         </tfoot>
                         <tbody>
                             @foreach (var item in Model)
                             {
                                 // Duruma göre CSS sınıfı belirleme
-                                string rowClass = item.Status == "Pending" ? "table-warning" :
-                                item.Status == "Accepted" ? "table-success" :
-                                item.Status == "Rejected" ? "table-danger" : "";
-
+                                string rowClass = item.IsActive == false ? "table-danger" :
+                                                  item.IsActive == true ? "table-success" : "";
                                 <tr class="@rowClass">
                                     <td>@item.EventId</td>
                                     <td>@item.Title</td>
                                     <td>@item.Description</td>
                                     <td>@item.IsActive</td>
+                                    <td>@item.UserName</td>
                                     <td>@item.DateAndTime</td>
-                                    <td>@item.Status</td>
+                                    <td>
+                                        <button class="btn btn-danger delete-button" data-url="/Admin/AdminEvent/Remove/@item.EventId">
+                                            Sil
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-warning update-button" data-url="/Admin/AdminEvent/Update/@item.EventId">
+                                            Güncelle
+                                        </button>
+                                    </td>
                                     <td>
                                         <button class="btn btn-success detail-button" data-url="/Admin/AdminEvent/Detail/@item.EventId">
-                                            Detayı Görüntüle
+                                            Detay
                                         </button>
                                     </td>
                                 </tr>
@@ -57,3 +74,4 @@
         </div>
     </div>
 </div>
+

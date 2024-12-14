@@ -1,0 +1,50 @@
+﻿@model AdminUpdateEvent
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center">Kullanıcı Rol Güncelleme Sayfası</h2>
+    <form class="Index" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="EventId" />
+
+        <div class="mb-3">
+            <label asp-for="UserName" class="form-label">Etkinliği Oluşturanın Adı</label>
+            <input asp-for="UserName" class="form-control" readonly />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">Etkinlik Adı</label>
+            <input asp-for="Title" class="form-control" placeholder="Etkinlik Adını Giriniz" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Etkinlik Açıklaması</label>
+            <input asp-for="Description" class="form-control" placeholder="Etkinlik Açıklamasını Giriniz"  />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="DateAndTime" class="form-label">Etkinlik Zamanı</label>
+            <input asp-for="DateAndTime" type="datetime-local" class="form-control" placeholder="Etkinliğin Tarih ve Saatini Giriniz" />
+            <span asp-validation-for="DateAndTime" class="text-danger"></span>
+        </div>
+
+
+        <div class="mb-3">
+            <label asp-for="IsActive" class="form-label">Aktif Durumda Mı?</label>
+            <select asp-for="IsActive" class="form-select">
+                <option value="true" selected="@(Model.IsActive ? "selected" : null)">True</option>
+                <option value="false" selected="@(Model.IsActive ? null : "selected")">False</option>
+            </select>
+            <span asp-validation-for="IsActive" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Güncelle</button>
+    </form>
+</div>
+

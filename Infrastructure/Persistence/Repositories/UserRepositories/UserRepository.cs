@@ -31,20 +31,22 @@ namespace Persistence.Repositories.UserRepositories
                 .ToListAsync();
         }
 
-        public async Task<List<GetAllUserByEventUserIdQueryResult>> GetAllUserByEventUserId(int eventId)
+        public async Task<List<GetAllUserByEventIdQueryResult>> GetAllUserByEventUserId(int eventId)
         {
             return await _context.EventsAndUsers
                  .Where(x=>x.EventId == eventId && x.DeletedDate==null)
                  .Include(x=>x.User)
                  .ThenInclude(x=>x.Role)
-                 .Select(x=> new GetAllUserByEventUserIdQueryResult
+                 .Select(x=> new GetAllUserByEventIdQueryResult
                  {
                      UserId = x.UserId,
                      Email=x.User.Email,
                      Surname=x.User.Surname,
                      Name=x.User.Name,
                      PhoneNumber=x.User.PhoneNumber,
-                     RoleName=x.User.Role.RoleName
+                     RoleName=x.User.Role.RoleName,
+                     Status=x.Status,
+                     BasvuruZamani=x.BasvuruZamanı
                  }).ToListAsync();
                  
         }

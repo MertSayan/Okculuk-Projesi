@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Mediatr.Users.Queries
 {
-    public class GetAllUserByEventUserIdQuery:IRequest<List<GetAllUserByEventUserIdQueryResult>>
+    public class GetAllUserByEventIdQuery:IRequest<List<GetAllUserByEventIdQueryResult>>
     {
         public int EventId { get; set; }
 
-        public GetAllUserByEventUserIdQuery(int eventId)
+        public GetAllUserByEventIdQuery(int eventId)
         {
             EventId = eventId;
         }

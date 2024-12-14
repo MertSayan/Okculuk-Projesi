@@ -1,57 +1,55 @@
-﻿@model List<AdminResultAllUser>
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
-}
-
+﻿@model List<AdminResultAllUserByEventId>
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Tüm Kullanıcılar</h4>
+                <h4 class="card-title">Etkinliğe Cevap Veren Kullanıcılar</h4>
             </div>
-
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="basic-datatables"
-                           class="display table table-striped table-hover">
+                    <table id="basic-datatables" class="table table-hover">
                         <thead>
                             <tr>
                                 <th>UserId</th>
-                                <th>Name</th>
-                                <th>Surname</th>
+                                <th>Ad</th>
+                                <th>Soyad</th>
+                                <th>Telefon Numarası</th>
                                 <th>Email</th>
-                                <th>Phone</th>
                                 <th>Rol</th>
+                                <th>Basvuru Zamani</th>
+                                <th>Durum</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>UserId</th>
-                                <th>Name</th>
-                                <th>Surname</th>
+                                <th>Ad</th>
+                                <th>Soyad</th>
+                                <th>Telefon Numarası</th>
                                 <th>Email</th>
-                                <th>Phone</th>
                                 <th>Rol</th>
+                                <th>Basvuru Zamani</th>
+                                <th>Durum</th>
                             </tr>
                         </tfoot>
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
+                                // Duruma göre CSS sınıfı belirleme
+                                string rowClass = item.Status == "Pending" ? "table-warning" :
+                                item.Status == "Accepted" ? "table-success" :
+                                item.Status == "Rejected" ? "table-danger" : "";
+
+                                <tr class="@rowClass">
                                     <td>@item.UserId</td>
                                     <td>@item.Name</td>
                                     <td>@item.Surname</td>
-                                    <td>@item.Email</td>
                                     <td>@item.PhoneNumber</td>
+                                    <td>@item.Email</td>
                                     <td>@item.RoleName</td>
+                                    <td>@item.BasvuruZamani</td>
+                                    <td>@item.Status</td>
                                     <td>
-                                        <button class="btn btn-danger delete-button" data-url="/Admin/AdminUser/Remove/@item.UserId">
-                                            Sil
-                                        </button>
-                                        <button class="btn btn-warning update-button" data-url="/Admin/AdminUser/Update/@item.UserId">
-                                            Güncelle
-                                        </button>
                                         <button class="btn btn-success detail-button" data-url="/Admin/AdminUser/Detail/@item.UserId">
                                             Detayı Görüntüle
                                         </button>
@@ -65,4 +63,3 @@
         </div>
     </div>
 </div>
-

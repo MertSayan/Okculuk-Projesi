@@ -41,7 +41,7 @@ namespace WebApi.Controllers
         [HttpGet("GetAllUserByEventId")]
         public async Task<IActionResult> GetAllUserByEventId(int eventId)
         {
-            var values = await _mediator.Send(new GetAllUserByEventUserIdQuery(eventId));
+            var values = await _mediator.Send(new GetAllUserByEventIdQuery(eventId));
             return Ok(values);
         }
         [HttpPost]

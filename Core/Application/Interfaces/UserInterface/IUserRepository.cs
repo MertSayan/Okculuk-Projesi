@@ -16,7 +16,7 @@ namespace Application.Interfaces.UserInterface
         Task RemoveUserAsync(User user);
         Task UpdateUserAsync(User user);
 
-        Task<List<GetAllUserByEventUserIdQueryResult>> GetAllUserByEventUserId(int eventId);
+        Task<List<GetAllUserByEventIdQueryResult>> GetAllUserByEventUserId(int eventId);
 
     }
 }

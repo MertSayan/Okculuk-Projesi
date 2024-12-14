@@ -1,0 +1,46 @@
+﻿@model AdminResultEventDetailInformation
+
+
+<div>
+    <div class="card card-post card-round">
+        <div class="col-md-6 ms-auto me-auto">
+            <img class="img-thumbnail  " src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/img/blogpost.jpg" alt="Card image cap">
+
+        </div>
+        <div class="card-body col-md-6 ms-auto me-auto">
+            <div class="d-flex">
+                <div class="avatar">
+                    <img src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/img/profile2.jpg" alt="..." class="avatar-img rounded-circle">
+                </div>
+                <div class="info-post ms-2">
+                    <p class="username">Etkinliği Oluşturan: @Model.UserName</p>
+                    <p class="date text-muted">Etkinlik Tarihi: @Model.DateAndTime</p>
+                </div>
+            </div>
+            <div class="separator-solid"></div>
+            <h3 class="card-title">
+                 @Model.Title
+            </h3>
+            <p class="card-text">
+                @Model.Description
+            </p>
+        </div>
+
+        <div class="card-footer col-md-6 ms-auto me-auto">
+            <div class="row user-stats text-center">
+                <div class="col">
+                    <div class="number">125</div>
+                    <div class="title">Kabul eden  Kişi Sayısı</div>
+                </div>
+                <div class="col">
+                    <div class="number">25K</div>
+                    <div class="title">Reddeden Kişi Sayısı</div>
+                </div>
+                <div class="col">
+                    <div class="number">134</div>
+                    <div class="title">Askıda Bekleyen</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

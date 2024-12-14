@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Mediatr.Users.Results
 {
-    public class GetAllUserByEventUserIdQueryResult
+    public class GetAllUserByEventIdQueryResult
     {
         public int UserId { get; set; }
         public string Name { get; set; }
@@ -14,5 +14,9 @@ namespace Application.Features.Mediatr.Users.Results
         public string PhoneNumber { get; set; }
         public string RoleName { get; set; }
         public string Email { get; set; }
+
+        public string Status { get; set; }
+        
+        public DateTime BasvuruZamani {  get; set; }
     }
 }

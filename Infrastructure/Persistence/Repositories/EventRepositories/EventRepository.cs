@@ -71,6 +71,13 @@ namespace Persistence.Repositories.EventRepositories
             if(eventt.DeletedDate == null)
             {
                 eventt.DeletedDate= DateTime.Now;
+
+                var relatedEventUsers=_context.EventsAndUsers.Where(x=>x.EventId == eventt.EventId && x.DeletedDate==null).ToList();
+                foreach (var item in relatedEventUsers)
+                {
+                    item.DeletedDate = DateTime.Now;
+                }
+
                 await _context.SaveChangesAsync();
             }
             else

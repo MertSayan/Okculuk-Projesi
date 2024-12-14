@@ -13,18 +13,18 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Mediatr.Users.Handlers.Read
 {
-    public class GetAllUserByEventUserIdQueryHandler : IRequestHandler<GetAllUserByEventUserIdQuery, List<GetAllUserByEventUserIdQueryResult>>
+    public class GetAllUserByEventIdQueryHandler : IRequestHandler<GetAllUserByEventIdQuery, List<GetAllUserByEventIdQueryResult>>
     {
         private readonly IUserRepository _userRepository;
         private readonly IEventRepository _eventRepository;
 
-        public GetAllUserByEventUserIdQueryHandler(IUserRepository userRepository, IEventRepository eventRepository)
+        public GetAllUserByEventIdQueryHandler(IUserRepository userRepository, IEventRepository eventRepository)
         {
             _userRepository = userRepository;
             _eventRepository = eventRepository;
         }
 
-        public async Task<List<GetAllUserByEventUserIdQueryResult>> Handle(GetAllUserByEventUserIdQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetAllUserByEventIdQueryResult>> Handle(GetAllUserByEventIdQuery request, CancellationToken cancellationToken)
         {
             var eventt=await _eventRepository.GetEventById(request.EventId);
             if (eventt != null)
