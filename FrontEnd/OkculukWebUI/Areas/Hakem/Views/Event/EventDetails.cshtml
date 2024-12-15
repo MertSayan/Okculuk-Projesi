@@ -1,0 +1,46 @@
+﻿@model CreateUserEvent
+@{
+    ViewData["Title"] = "EventDetails";
+    Layout = "~/Areas/Hakem/Views/HakemLayout/Index.cshtml";
+    bool isAlreadyRequested = ViewBag.IsAlreadyRequested ?? false;
+}
+
+<h1 class="text-center mb-4">Etkinlik Detayı</h1>
+
+<!-- Ana Container -->
+<div class="container d-flex flex-column align-items-center justify-content-center">
+    <!-- Partial Component Çağırma -->
+    <div class="mb-4 w-100 text-center">
+        @await Component.InvokeAsync("_EventDetailForAcceptOrRejectComponentPartial", new { EventId = ViewBag.EventId })
+    </div>
+
+    <!-- Form ve Butonlar -->
+   
+    <div class="w-100 text-center">
+        @if (isAlreadyRequested)
+        {
+            <p>Bu etkinliğe zaten istekte bulundunuz.</p>
+        }
+        else
+        {
+            <form method="post" asp-controller="Event" class="text-center">
+                <!-- Hidden alan: EventId ve UserId -->
+                <input type="hidden" asp-for="EventId" value="@ViewBag.EventId" />
+                <input type="hidden" asp-for="UserId" value="@ViewBag.UserId" />
+
+                <!-- Butonlar -->
+                <div class="btn-group" role="group" aria-label="Event Actions">
+                    <!-- Kabul Et Butonu -->
+                    <button type="submit" name="Status" value="Pending" class="btn btn-success btn-lg px-5 py-3">
+                        <i class="fas fa-check"></i> Kabul Et (Admin Onayı Gerekecek)
+                    </button>
+
+                    <!-- Reddet Butonu -->
+                    <button type="submit" name="Status" value="Rejected" class="btn btn-danger btn-lg px-5 py-3 ms-3">
+                        <i class="fas fa-times"></i> Reddet
+                    </button>
+                </div>
+            </form>
+        }
+    </div>
+</div>

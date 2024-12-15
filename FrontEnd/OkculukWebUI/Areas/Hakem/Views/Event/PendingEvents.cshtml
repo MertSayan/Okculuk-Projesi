@@ -1,0 +1,44 @@
+﻿@model List<ResultEventsByStatusForUser>
+@{
+    ViewData["Title"] = "PendingEvents";
+    Layout = "~/Areas/Hakem/Views/HakemLayout/Index.cshtml";
+}
+
+<div class="container-fluid p-4">
+    <div class="card shadow">
+        <!-- Başlık -->
+        <h2 class="card-title lead p-4 border-bottom bg-light text-center" style="font-weight: 600">
+            Onay Bekleyen Etkinlikler
+        </h2>
+        <!-- Scrollable İçerik -->
+        <div class="overflow-auto" style="max-height: calc(100vh - 150px);">
+            @foreach (var item in Model)
+            {
+                <div class="d-flex border-bottom p-4 align-items-start">
+                    <!-- Sol taraf ikon -->
+                    <div class="text-warning me-4">
+                        <i class="far fa-3x fa-clock"></i>
+                    </div>
+                    <!-- Sağ taraf içerik -->
+                    <div>
+                        <h5 class="mb-2">
+                            <a href="@Url.Action("EventDetails", "Event", new { id = item.EventId })"
+                               class="text-decoration-none text-dark">
+                                @item.Title
+                            </a>
+                        </h5>
+                        <p class="card-text mb-1 small">@item.UserName tarafından oluşturuldu</p>
+                        <p class="card-text mb-0 small text-muted">
+                            Tarih ve Saat: @item.DateAndTime
+                        </p>
+                        <p class="card-text mb-0 small text-muted">
+                            @item.Description.Substring(0, Math.Min(50, item.Description.Length))...
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+

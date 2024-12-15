@@ -26,6 +26,7 @@ namespace Application.Features.Mediatr.EventUsers.Handlers.Write
                 BasvuruZamanı=DateTime.Now,
                 EventId=request.EventId,
                 UserId=request.UserId,
+                Status=request.Status,
             });
         }
     }
