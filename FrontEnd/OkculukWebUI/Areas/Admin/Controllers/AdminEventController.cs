@@ -42,6 +42,7 @@ namespace OkculukWebUI.Areas.Admin.Controllers
             return View();
         }
 
+
         [HttpGet]
         [Route("Update/{id}")]
         public async Task<IActionResult> Update(int id)
@@ -107,6 +108,37 @@ namespace OkculukWebUI.Areas.Admin.Controllers
             }
 
             return View();
+        }
+
+        [HttpGet]
+        [Route("AcceptOrRejectEvent")]
+        public async Task<IActionResult> AcceptOrRejectEvent()
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("https://localhost:7082/api/Events/GetAllPendingEventForAdmin");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData=await responseMessage.Content.ReadAsStringAsync();
+                var values=JsonConvert.DeserializeObject<List<AdminChangeEventUserStatus>>(jsonData);
+                return View(values);
+            }
+
+            return View();
+        }
+        [HttpPost]
+        [Route("AcceptOrRejectEvent")]
+        public async Task<IActionResult> AcceptOrRejectEvent(AdminChangeEventUserStatus statusChange)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(statusChange);
+            StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responseMessage = await client.PutAsync("https://localhost:7082/api/EventUsers", content);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("AcceptOrRejectEvent", "AdminEvent", new { area = "Admin" });
+            }
+            return View();
+
         }
     }
 }

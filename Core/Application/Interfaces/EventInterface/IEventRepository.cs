@@ -25,6 +25,8 @@ namespace Application.Interfaces.EventInterface
 
         Task<GetEventsCountByStatusAndUserIdQueryResult> GetEventsCountByStatusByUserId(int userId);
 
+        Task<List<GetAllPendingEventQueryResult>> GetAllPendingEvent();
+
 
     }
 }

@@ -55,7 +55,23 @@ namespace Persistence.Repositories.EventRepositories
                 .ToListAsync();
         }
 
-        
+        public async Task<List<GetAllPendingEventQueryResult>> GetAllPendingEvent()
+        {
+            return await _context.EventsAndUsers
+                .Where(x => x.DeletedDate == null && x.Status == "Pending")
+                .Include(x => x.Event)
+                .Include(x => x.User)
+                .Select(x=> new GetAllPendingEventQueryResult
+                {
+                    Status=x.Status,
+                    Description=x.Event.Description,
+                    EventUserId=x.EventUserId,
+                    PhoneNumber=x.User.PhoneNumber,
+                    Title=x.Event.Title,
+                    UserName=x.User.Name+" "+x.User.Surname,
+                    UserId=x.User.UserId,
+                }).ToListAsync();
+        }
 
         public async Task<List<Event>> GetAvailableEventsForUserAsync(int userId)
         {

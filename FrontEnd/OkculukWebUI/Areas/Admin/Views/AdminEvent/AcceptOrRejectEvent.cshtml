@@ -1,0 +1,79 @@
+﻿@model List<AdminChangeEventUserStatus>
+@{
+    ViewData["Title"] = "AcceptOrRejectEvent";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container-fluid mt-4">
+    <h2 class="text-center mb-4">Etkinliğe Katılım Talepleri</h2>
+
+    @if (Model != null && Model.Count > 0)
+    {
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Etkinlik Adı</th>
+                                <th>Açıklama</th>
+                                <th>Kullanıcı Adı</th>
+                                <th>Telefon Numarası</th>
+                                <th>Mevcut Durum</th>
+                                <th>İşlem</th>
+                                <th>Kullanıcı Detayı</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+                                <tr>
+                                    <td>@(i + 1)</td>
+                                    <td>@Model[i].Title</td>
+                                    <td>@Model[i].Description</td>
+                                    <td>@Model[i].UserName</td>
+                                    <td>@Model[i].PhoneNumber</td>
+                                    <td>@Model[i].Status</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                            <!-- Kabul Et Form -->
+                                            <form asp-action="AcceptOrRejectEvent" method="post" class="mx-1">
+                                                <input asp-for="@Model[i].EventUserId" type="hidden" name="EventUserId" value="@Model[i].EventUserId" />
+                                                <input asp-for="@Model[i].Status" type="hidden" name="Status" value="Accepted" />
+                                                <button type="submit" class="btn btn-success">Kabul</button>
+                                            </form>
+
+                                            <!-- Reddet Form -->
+                                            <form asp-action="AcceptOrRejectEvent" method="post" class="mx-1">
+                                                <input asp-for="@Model[i].EventUserId" type="hidden" name="EventUserId" value="@Model[i].EventUserId" />
+                                                <input asp-for="@Model[i].Status" type="hidden" name="Status" value="Rejected" />
+                                                <button type="submit" class="btn btn-danger">Red</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary detail-button" data-url="/Admin/AdminUser/Detail/@Model[i].UserId">
+                                            Kullanıcı Detayı
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            <p>Henüz onaylanmayı bekleyen bir katılım talebi bulunmamaktadır.</p>
+        </div>
+    }
+</div>
+
+
+
+
+

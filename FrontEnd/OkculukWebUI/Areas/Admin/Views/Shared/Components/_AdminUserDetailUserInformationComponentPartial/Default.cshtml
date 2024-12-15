@@ -20,20 +20,8 @@
             </div>
         </div>
         <div class="card-footer">
-            <div class="row user-stats text-center">
-                <div class="col">
-                    <div class="number">125</div>
-                    <div class="title">Katıldığı etkinlikler</div>
-                </div>
-                <div class="col">
-                    <div class="number">25K</div>
-                    <div class="title">Reddettiği etkinlikler</div>
-                </div>
-                <div class="col">
-                    <div class="number">134</div>
-                    <div class="title">Cevap vermediği etkinlikler</div>
-                </div>
-            </div>
+            @await Component.InvokeAsync("_AdminUserDetailEventCountComponentPartial", new { id = Convert.ToInt32(ViewBag.UserId) })
+
         </div>
     </div>
 </div>
