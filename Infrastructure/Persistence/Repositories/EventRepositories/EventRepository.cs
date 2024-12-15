@@ -39,6 +39,7 @@ namespace Persistence.Repositories.EventRepositories
 
         public async Task<List<GetAllEventByUserIdQueryResult>> GetAllEventByUserId(int userId)
         {
+
             return await _context.EventsAndUsers
                 .Where(x => x.DeletedDate == null && x.UserId == userId)
                 .Include(x => x.Event)
@@ -102,6 +103,28 @@ namespace Persistence.Repositories.EventRepositories
                 .ToListAsync();
         }
 
+        public async Task<GetEventsCountByStatusAndUserIdQueryResult> GetEventsCountByStatusByUserId(int userId)
+        {
+           
+            var acceptedCount = await _context.EventsAndUsers
+                .Where(eu => eu.UserId == userId && eu.Status == "Accepted")
+                .CountAsync();
+
+            var rejectedCount = await _context.EventsAndUsers
+                .Where(eu => eu.UserId == userId && eu.Status == "Rejected")
+                .CountAsync();
+
+            var pendingCount = await _context.EventsAndUsers
+                .Where(eu => eu.UserId == userId && eu.Status == "Pending")
+                .CountAsync();
+
+            return new GetEventsCountByStatusAndUserIdQueryResult
+            {
+                AcceptedCount = acceptedCount,
+                RejectedCount = rejectedCount,
+                PendingCount=pendingCount 
+            };
+        }
 
         public async Task RemoveEventAsync(Event eventt)
         {

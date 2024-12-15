@@ -52,6 +52,12 @@ namespace WebApi.Controllers
             return Ok(values);
         }
 
+        [HttpGet("GetEventsCountByStatusAndUserId")]
+        public async Task<IActionResult> GetEventsCountByStatusAndUserId(int userId)
+        {
+            var values = await _mediator.Send(new GetEventsCountByStatusAndUserIdQuery(userId));
+            return Ok(values);
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateEvent(CreateEventCommand command)

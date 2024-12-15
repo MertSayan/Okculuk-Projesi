@@ -23,7 +23,7 @@ namespace Application.Interfaces.EventInterface
 
         Task<List<GetAllEventByUserIdStatusQueryResult>> GetEventsByStatus(int userId, Expression<Func<EventUser, bool>> statusPredicate);
 
-
+        Task<GetEventsCountByStatusAndUserIdQueryResult> GetEventsCountByStatusByUserId(int userId);
 
 
     }

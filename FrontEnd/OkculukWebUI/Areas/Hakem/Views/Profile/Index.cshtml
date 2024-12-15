@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Hakem/Views/HakemLayout/Index.cshtml";
+}
+
+<h1>Profil</h1>
+
+@await Component.InvokeAsync("_UserProfileComponentPartial", new { UserId = Convert.ToInt32(ViewBag.UserId) })
+

@@ -1,0 +1,29 @@
+﻿@model UserProfileInformation
+
+<div>
+    <div class="card card-profile">
+        <div class="card-header" style="background-image: url('~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/img/blogpost.jpg')">
+            <div class="profile-picture">
+                <div class="avatar avatar-xl">
+                    <img src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="user-profile text-center">
+                <div class="name">Ad ve Soyad : @Model.Name @Model.Surname</div>
+                <div class="job">Rolü : @Model.RoleName</div>
+                <div class="desc">Telefon Numarası : @Model.PhoneNumber</div>
+                <div class="desc">Mail Adresi : @Model.Email</div>
+                <div class="desc">Şifre : @Model.Password</div>
+
+            </div>
+        </div>
+        <div class="card-footer">
+            @await Component.InvokeAsync("_UserProfileEventsCountComponentPartial", new { UserId = Convert.ToInt32(ViewBag.UserId) })
+            
+        </div>
+    </div>
+</div>
+
+

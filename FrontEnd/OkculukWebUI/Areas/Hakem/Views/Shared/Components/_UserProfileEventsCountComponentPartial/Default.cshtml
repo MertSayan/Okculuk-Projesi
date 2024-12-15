@@ -1,0 +1,17 @@
+﻿@model ResutlEventsCountByUserId
+
+
+<div class="row user-stats text-center">
+    <div class="col">
+        <div class="number">@Model.AcceptedCount</div>
+        <div class="title">Katıldığı etkinlikler</div>
+    </div>
+    <div class="col">
+        <div class="number">@Model.RejectedCount</div>
+        <div class="title">Reddettiği etkinlikler</div>
+    </div>
+    <div class="col">
+        <div class="number">@Model.PendingCount</div>
+        <div class="title">Onay bekleyen etkinlikler</div>
+    </div>
+</div>
