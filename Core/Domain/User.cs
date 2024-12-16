@@ -20,5 +20,10 @@ namespace Domain
         public List<Event> Events { get; set; }
         public List<EventUser> EventsAndUsers { get; set; }
 
+        public int? RegionId { get; set; }
+        public Region Region { get; set; }
+
+        
+
     }
 }

@@ -54,5 +54,7 @@ namespace Persistence.Context
         public DbSet<EventUser> EventsAndUsers { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Region> Regions { get; set; }
+        public DbSet<VisibleEvent> VisibleEvents { get; set; }
     }
 }

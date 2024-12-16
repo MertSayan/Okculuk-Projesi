@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Context;
 
@@ -11,9 +12,11 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(OkculukContext))]
-    partial class OkculukContextModelSnapshot : ModelSnapshot
+    [Migration("20241216185319_Regionsinifi_VisibleEventSinifi_eklendi")]
+    partial class Regionsinifi_VisibleEventSinifi_eklendi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,14 +61,9 @@ namespace Persistence.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("VisibleEventId")
-                        .HasColumnType("int");
-
                     b.HasKey("EventId");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("VisibleEventId");
 
                     b.ToTable("Events");
                 });
@@ -125,7 +123,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("RegionId");
 
-                    b.ToTable("Regions");
+                    b.ToTable("Region");
                 });
 
             modelBuilder.Entity("Domain.Role", b =>
@@ -197,40 +195,13 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("VisibleEventId")
-                        .HasColumnType("int");
-
                     b.HasKey("UserId");
 
                     b.HasIndex("RegionId");
 
                     b.HasIndex("RolId");
 
-                    b.HasIndex("VisibleEventId");
-
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Domain.VisibleEvent", b =>
-                {
-                    b.Property<int>("VisibleEventId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VisibleEventId"));
-
-                    b.Property<int>("EventId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsAnswered")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("VisibleEventId");
-
-                    b.ToTable("VisibleEvents");
                 });
 
             modelBuilder.Entity("Domain.Event", b =>
@@ -240,10 +211,6 @@ namespace Persistence.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.HasOne("Domain.VisibleEvent", null)
-                        .WithMany("Events")
-                        .HasForeignKey("VisibleEventId");
 
                     b.Navigation("User");
                 });
@@ -279,10 +246,6 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Domain.VisibleEvent", null)
-                        .WithMany("Users")
-                        .HasForeignKey("VisibleEventId");
-
                     b.Navigation("Region");
 
                     b.Navigation("Role");
@@ -308,13 +271,6 @@ namespace Persistence.Migrations
                     b.Navigation("Events");
 
                     b.Navigation("EventsAndUsers");
-                });
-
-            modelBuilder.Entity("Domain.VisibleEvent", b =>
-                {
-                    b.Navigation("Events");
-
-                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }
