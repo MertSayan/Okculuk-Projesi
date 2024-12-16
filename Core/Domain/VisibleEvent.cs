@@ -10,9 +10,9 @@ namespace Domain
     {
         public int VisibleEventId { get; set; }
         public int EventId { get; set; }
-        public List<Event> Events { get; set; }
+        public Event Events { get; set; }
         public int UserId { get; set; }
-        public List<User> Users { get; set; }
+        public User Users { get; set; }
         public bool IsAnswered { get; set; }
 
 

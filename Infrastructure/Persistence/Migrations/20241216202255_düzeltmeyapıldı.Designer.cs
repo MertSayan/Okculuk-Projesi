@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Context;
 
@@ -11,9 +12,11 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(OkculukContext))]
-    partial class OkculukContextModelSnapshot : ModelSnapshot
+    [Migration("20241216202255_düzeltmeyapıldı")]
+    partial class düzeltmeyapıldı
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +65,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Events", (string)null);
+                    b.ToTable("Events");
                 });
 
             modelBuilder.Entity("Domain.EventUser", b =>
@@ -103,7 +106,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("EventsAndUsers", (string)null);
+                    b.ToTable("EventsAndUsers");
                 });
 
             modelBuilder.Entity("Domain.Region", b =>
@@ -120,7 +123,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("RegionId");
 
-                    b.ToTable("Regions", (string)null);
+                    b.ToTable("Regions");
                 });
 
             modelBuilder.Entity("Domain.Role", b =>
@@ -146,7 +149,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.ToTable("Roles", (string)null);
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("Domain.User", b =>
@@ -198,7 +201,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("RolId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Domain.VisibleEvent", b =>
@@ -224,7 +227,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("VisibleEvents", (string)null);
+                    b.ToTable("VisibleEvents");
                 });
 
             modelBuilder.Entity("Domain.Event", b =>
