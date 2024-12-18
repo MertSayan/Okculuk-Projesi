@@ -1,0 +1,9 @@
+﻿@model List<ResultAllRegion>
+
+
+    <option value="">Bölge Seçiniz</option>
+    @foreach (var region in Model)
+    {
+        <option value="@region.RegionId">@region.RegionName</option>
+    }
+

@@ -20,4 +20,9 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Mediatr\Regions\Commands\" />
+    <Folder Include="Features\Mediatr\Regions\Handlers\Write\" />
+  </ItemGroup>
+
 </Project>

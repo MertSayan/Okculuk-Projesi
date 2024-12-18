@@ -30,6 +30,7 @@ namespace Application.Features.Mediatr.Users.Handlers.Write
                 RolId=(int)Rol.Hakem,
                 Password=request.Password,
                 Email=request.Email,
+                RegionId=request.RegionId,  
             });
         }
     }

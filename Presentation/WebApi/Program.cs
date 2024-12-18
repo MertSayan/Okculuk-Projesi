@@ -1,6 +1,7 @@
 
 using Application.Interfaces.EventInterface;
 using Application.Interfaces.EventUserInterface;
+using Application.Interfaces.RegionInterface;
 using Application.Interfaces.RoleInterface;
 using Application.Interfaces.UserInterface;
 using Application.Services;
@@ -11,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using Persistence.Context;
 using Persistence.Repositories.EventRepositories;
 using Persistence.Repositories.EventUserRepositories;
+using Persistence.Repositories.RegionRepositories;
 using Persistence.Repositories.RoleRepositories;
 using Persistence.Repositories.UserRepositories;
 using System.Text;
@@ -47,6 +49,7 @@ namespace WebApi
             builder.Services.AddScoped<IEventRepository,EventRepository>();
             builder.Services.AddScoped<IEventUserRepository,EventUseRRepository>();
             builder.Services.AddScoped<IRoleRepository,RoleRepository>();
+            builder.Services.AddScoped<IRegionRepository,RegionRepository>();
 
             builder.Services.AddSaveApplicationService();
 

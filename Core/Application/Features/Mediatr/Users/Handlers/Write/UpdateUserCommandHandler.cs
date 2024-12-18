@@ -30,7 +30,9 @@ namespace Application.Features.Mediatr.Users.Handlers.Write
                 user.PhoneNumber= request.PhoneNumber;
                 user.Email= request.Email;
                 user.Password= request.Password;
+                user.RegionId= request.RegionId;
                 await _userRepository.UpdateUserAsync(user);
+                
             }
             else if (user.DeletedDate != null)
             {

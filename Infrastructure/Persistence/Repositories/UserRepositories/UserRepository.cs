@@ -29,6 +29,7 @@ namespace Persistence.Repositories.UserRepositories
             return await _context.Users
                 .Where(x => x.DeletedDate == null)
                 .Include(x=>x.Role)
+                .Include(x=>x.Region)
                 .ToListAsync();
         }
 

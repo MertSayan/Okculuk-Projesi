@@ -1,14 +1,12 @@
-﻿using Domain;
-using MediatR;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Mediatr.Users.Commands
+namespace OkculukDto.RegisterDtos
 {
-    public class CreateUserCommand:IRequest
+    public class CreateRegister
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -17,6 +15,5 @@ namespace Application.Features.Mediatr.Users.Commands
         public string Password { get; set; }
 
         public int RegionId { get; set; }
-
     }
 }

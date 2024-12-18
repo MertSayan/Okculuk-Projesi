@@ -14,5 +14,6 @@ namespace Application.Features.Mediatr.Users.Results
         public string PhoneNumber { get; set; }
         public string RoleName { get; set; }
         public string Email {  get; set; }
+        public string RegionName { get; set; }
     }
 }
