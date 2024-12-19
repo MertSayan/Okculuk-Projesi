@@ -66,6 +66,7 @@ namespace Persistence.Repositories.UserRepositories
             var user = await _context.Users
                     .Where(x=>x.DeletedDate==null)
                     .Include(x => x.Role)
+                    .Include(x=>x.Region)
                     .FirstOrDefaultAsync(x => x.UserId == id);
  
             if (user !=null)

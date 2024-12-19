@@ -13,8 +13,7 @@ namespace Domain
         public Event Events { get; set; }
         public int UserId { get; set; }
         public User Users { get; set; }
-        public bool IsAnswered { get; set; }
-
+        public bool? IsAnswered { get; set; }
 
     }
 }

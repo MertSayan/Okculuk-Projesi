@@ -44,6 +44,13 @@ namespace WebApi.Controllers
             var values = await _mediator.Send(new GetAllUserByEventIdQuery(eventId));
             return Ok(values);
         }
+        [HttpGet("GetAllUserForVisibleEvent")]
+        public async Task<IActionResult> GetAllUserForVisibleEvent()
+        {
+            var values = await _mediator.Send(new GetAllUserForVisibleEventQuery());
+            return Ok(values);
+        }
+        
         [HttpPost]
         public async Task<IActionResult> CreateUser(CreateUserCommand command)
         {

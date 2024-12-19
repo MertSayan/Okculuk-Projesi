@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using OkculukDto.EventDtos;
+using OkculukDto.VisibleEventDtos;
 using System.Security.Claims;
 using System.Text;
 
@@ -95,6 +96,33 @@ namespace OkculukWebUI.Areas.Admin.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        [Route("CreateVisibleEvent")]
+        public IActionResult CreateVisibleEvent()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Route("CreateVisibleEvent")]
+        public async Task<IActionResult> CreateVisibleEvent(CreateVisibleEvent createVisibleEvent)
+        {
+            // UserId'leri içeren modeli API'ye gönderiyoruz
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(createVisibleEvent);
+            StringContent content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+
+            var responseMessage = await client.PostAsync("https://localhost:7082/api/VisibleEvents", content);
+
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "AdminEvent", new { area = "Admin" });
+            }
+
+            // Eğer hata alırsak, View'e geri dönüyoruz
+            return View(createVisibleEvent);
+        }
+
 
         [HttpGet]
         [Route("Remove/{id}")]

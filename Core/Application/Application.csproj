@@ -23,6 +23,8 @@
   <ItemGroup>
     <Folder Include="Features\Mediatr\Regions\Commands\" />
     <Folder Include="Features\Mediatr\Regions\Handlers\Write\" />
+    <Folder Include="Features\Mediatr\VisibleEvents\Results\" />
+    <Folder Include="Features\Mediatr\VisibleEvents\Queries\" />
   </ItemGroup>
 
 </Project>

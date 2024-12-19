@@ -4,6 +4,7 @@ using Application.Interfaces.EventUserInterface;
 using Application.Interfaces.RegionInterface;
 using Application.Interfaces.RoleInterface;
 using Application.Interfaces.UserInterface;
+using Application.Interfaces.VisibleEventInterface;
 using Application.Services;
 using Application.Tools;
 using AutoMapper;
@@ -15,6 +16,7 @@ using Persistence.Repositories.EventUserRepositories;
 using Persistence.Repositories.RegionRepositories;
 using Persistence.Repositories.RoleRepositories;
 using Persistence.Repositories.UserRepositories;
+using Persistence.Repositories.VisibleEventRepositories;
 using System.Text;
 
 namespace WebApi
@@ -50,6 +52,7 @@ namespace WebApi
             builder.Services.AddScoped<IEventUserRepository,EventUseRRepository>();
             builder.Services.AddScoped<IRoleRepository,RoleRepository>();
             builder.Services.AddScoped<IRegionRepository,RegionRepository>();
+            builder.Services.AddScoped<IVisibleEventRepository,VisibleEventRepository>();
 
             builder.Services.AddSaveApplicationService();
 

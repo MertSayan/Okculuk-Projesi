@@ -33,6 +33,7 @@ namespace Application.Features.Mediatr.Users.Handlers.Read
                     UserId = user.UserId,
                     Email = user.Email,
                     Password = user.Password,
+                    RegionName=user.Region.RegionName,
                 };
             }
             else

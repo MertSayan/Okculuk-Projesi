@@ -1,0 +1,13 @@
+﻿@model List<ResultAllEventForVisibleEvent>
+
+<div class="scrollable-list">
+    @foreach (var eventItem in Model)
+    {
+        <div class="form-check">
+            <input class="form-check-input event-radio" type="radio" name="EventId" id="event_@eventItem.EventId" value="@eventItem.EventId">
+            <label class="form-check-label" for="event_@eventItem.EventId">
+                <i class="bi bi-calendar-event"></i> @eventItem.Title
+            </label>
+        </div>
+    }
+</div>

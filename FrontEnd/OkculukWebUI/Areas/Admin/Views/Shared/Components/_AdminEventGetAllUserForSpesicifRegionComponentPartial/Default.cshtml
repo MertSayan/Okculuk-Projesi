@@ -1,0 +1,41 @@
+﻿@* @model List<ResultAllUserForVisibleEvent>
+<div>
+    <!-- Dropdown -->
+    <div class="input-group mb-3">
+        <select class="form-select" id="userDropdown">
+            <option value="" disabled selected>Kullanıcı Seçiniz</option>
+            @foreach (var user in Model)
+            {
+                <option value="@user.UserId">@user.Name @user.Surname</option>
+            }
+        </select>
+        <button class="btn btn-primary" id="addUserButton" type="button">
+            <i class="bi bi-plus-circle"></i> Ekle
+        </button>
+    </div>
+
+    <!-- Eklenen Kullanıcılar Listesi -->
+    <div id="selectedUsersList">
+        <!-- Dinamik olarak kullanıcı isimleri buraya eklenecek -->
+    </div>
+
+    <!-- Kullanıcı ID'lerin Gösterildiği TextArea -->
+    <textarea id="SelectedUserIds" name="UserId" rows="4" class="form-control" readonly></textarea>
+</div> *@
+
+
+  @model List<ResultAllUserForVisibleEvent>
+
+<div class="row">
+    @foreach (var user in Model)
+    {
+        <div class="col-md-6">
+            <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="UserId" value="@user.UserId" id="user_@user.UserId">
+                <label class="form-check-label" for="user_@user.UserId">
+                    <i class="bi bi-person-circle"></i> @user.Name @user.Surname
+                </label>
+            </div>
+        </div>
+    }
+</div>

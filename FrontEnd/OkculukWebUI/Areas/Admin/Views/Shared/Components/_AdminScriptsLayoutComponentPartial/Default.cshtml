@@ -31,6 +31,7 @@
 <!-- Kaiadmin JS -->
 <script src="~/kaiadmin-lite-1.2.0/kaiadmin-lite-1.2.0/assets/js/kaiadmin.min.js"></script>
 
+
 <script>
     // SweetAlert ile Silme İşlemi ve Yönlendirme
     $(document).on('click', '.delete-button', function (e) {
@@ -116,4 +117,32 @@
 
     
 </script>
+
+@* <script>
+    document.getElementById('addUserButton').addEventListener('click', function () {
+        const dropdown = document.getElementById('userDropdown');
+        const selectedUserId = dropdown.value;
+        const selectedUserName = dropdown.options[dropdown.selectedIndex].text;
+
+        if (selectedUserId && selectedUserName) {
+            // Seçilen kullanıcıyı listeye ekle
+            const userList = document.getElementById('selectedUsersList');
+            const userItem = document.createElement('div');
+            userItem.textContent = selectedUserName;
+            userItem.dataset.userId = selectedUserId;
+            userList.appendChild(userItem);
+
+            // TextArea'ya ekle
+            const userIdTextArea = document.getElementById('SelectedUserIds');
+            const currentUserIds = userIdTextArea.value.split(',').filter(id => id.trim() !== '');
+            if (!currentUserIds.includes(selectedUserId)) {
+                currentUserIds.push(selectedUserId);
+            }
+            userIdTextArea.value = currentUserIds.join(',');
+        }
+    });
+
+
+</script> *@
+
 

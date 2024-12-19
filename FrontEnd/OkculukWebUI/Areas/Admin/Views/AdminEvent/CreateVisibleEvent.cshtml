@@ -1,0 +1,60 @@
+﻿@model CreateVisibleEvent
+@{
+    ViewData["Title"] = "CreateVisibleEvent";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <!-- Başlık -->
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0"><i class="bi bi-calendar-check"></i> Etkinlik Görünürlüğünü Ayarla</h4>
+        </div>
+
+        <div class="card-body">
+            <form asp-action="CreateVisibleEvent" method="post">
+                <!-- Gizli Input -->
+                <input type="hidden" id="SelectedEventId" name="EventId" />
+
+                <!-- Etkinlik Listesi ve Kullanıcı Listesi Yan Yana -->
+                <div class="row mb-4">
+                    <!-- Etkinlik Listesi -->
+                    <div class="col-md-6">
+                        <h5 class="text-secondary"><i class="bi bi-calendar"></i> Etkinlik Seçiniz</h5>
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body scrollable-list">
+                                @await Component.InvokeAsync("_AdminGetAllEventForVisibleEventComponentPartial")
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kullanıcı Listesi -->
+                    <div class="col-md-6">
+                        <h5 class="text-secondary"><i class="bi bi-people"></i> Kullanıcı Listesi</h5>
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body scrollable-list">
+                                @await Component.InvokeAsync("_AdminEventGetAllUserForSpesicifRegionComponentPartial")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kaydet Butonu -->
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success btn-lg">
+                        <i class="bi bi-save"></i> Kaydet
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Radio Buton Değişim Scripti -->
+<script>
+    document.querySelectorAll('.event-radio').forEach(radio => {
+        radio.addEventListener('change', function () {
+            document.getElementById('SelectedEventId').value = this.value;
+        });
+    });
+</script>
