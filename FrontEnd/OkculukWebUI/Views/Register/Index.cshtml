@@ -90,6 +90,11 @@
                         </select>
                        
                     </div>
+                    <div class="mb-3">
+                        <label asp-for="InstitutionName" class="form-label">Varsa Çalıştığınız kurum</label>
+                        <input asp-for="InstitutionName" type="text" class="form-control" id="InstitutionName" placeholder="Varsa Çalıştığınız kurumu giriniz">
+                        <span asp-validation-for="InstitutionName" class="text-danger"></span>
+                    </div>
                     <button type="submit" class="btn btn-custom w-100">Kayıt Ol</button>
                 </form>
                 <div class="footer">

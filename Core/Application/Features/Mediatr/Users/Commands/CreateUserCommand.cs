@@ -17,6 +17,8 @@ namespace Application.Features.Mediatr.Users.Commands
         public string Password { get; set; }
 
         public int RegionId { get; set; }
+        public string? InstitutionName { get; set; }
+
 
     }
 }

@@ -76,14 +76,19 @@ namespace Persistence.Repositories.EventRepositories
         public async Task<List<Event>> GetAvailableEventsForUserAsync(int userId)
         {
             // Kullanıcının daha önce katılma/kabul/red durumlarına göre filtreleme
-            var userEventIds = await _context.EventsAndUsers
+            var userEventIdsForUserEvent = await _context.EventsAndUsers
                 .Where(eu => eu.DeletedDate == null && eu.UserId == userId)
                 .Select(eu => eu.EventId)
                 .ToListAsync();
 
+            var userEventIds = await _context.VisibleEvents
+                .Where(x => x.UserId == userId)
+                .Select(x => x.EventId)
+                .ToListAsync();
+
             return await _context.Events
-                .Where(e => e.DeletedDate == null && !userEventIds.Contains(e.EventId))
-                .Include(e => e.User)
+                .Where(x => x.DeletedDate == null && userEventIds.Contains(x.EventId) && !userEventIdsForUserEvent.Contains(x.EventId))
+                .Include(x => x.User)
                 .ToListAsync();
         }
 

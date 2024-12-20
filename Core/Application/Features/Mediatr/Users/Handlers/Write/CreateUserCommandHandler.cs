@@ -31,6 +31,7 @@ namespace Application.Features.Mediatr.Users.Handlers.Write
                 Password=request.Password,
                 Email=request.Email,
                 RegionId=request.RegionId,  
+                InstitutionName=request.InstitutionName,
             });
         }
     }

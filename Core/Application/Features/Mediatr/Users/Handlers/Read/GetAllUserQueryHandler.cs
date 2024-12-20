@@ -30,7 +30,8 @@ namespace Application.Features.Mediatr.Users.Handlers.Read
                 Surname=x.Surname,
                 UserId=x.UserId, 
                 Email=x.Email,
-                RegionName=x.Region.RegionName
+                RegionName=x.Region.RegionName,
+                InstitutionName=x.InstitutionName
             }).ToList();
         }
     }

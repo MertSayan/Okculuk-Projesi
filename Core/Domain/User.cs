@@ -23,7 +23,7 @@ namespace Domain
         public int? RegionId { get; set; }
         public Region Region { get; set; }
 
-        
+        public string? InstitutionName { get; set; }
 
     }
 }

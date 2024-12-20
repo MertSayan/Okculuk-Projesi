@@ -15,5 +15,6 @@ namespace Application.Features.Mediatr.Users.Results
         public string RoleName { get; set; }
         public string Email {  get; set; }
         public string RegionName { get; set; }
+        public string InstitutionName { get; set; }
     }
 }
