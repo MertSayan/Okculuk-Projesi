@@ -98,13 +98,14 @@ namespace OkculukWebUI.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [Route("CreateVisibleEvent")]
-        public IActionResult CreateVisibleEvent()
+        [Route("CreateVisibleEvent/{regionName=null}")]
+        public IActionResult CreateVisibleEvent(string regionName=null)
         {
+            ViewBag.RegionName = regionName;
             return View();
         }
         [HttpPost]
-        [Route("CreateVisibleEvent")]
+        [Route("CreateVisibleEvent/{id=0}")]
         public async Task<IActionResult> CreateVisibleEvent(CreateVisibleEvent createVisibleEvent)
         {
             // UserId'leri içeren modeli API'ye gönderiyoruz

@@ -53,6 +53,19 @@ namespace Persistence.Repositories.UserRepositories
                  
         }
 
+        public async Task<List<User>> GetAllUserByRegionId(string regionName)
+        {
+            var regionId = await _context.Regions
+                 .Where(x => x.RegionName == regionName)
+                 .Select(x => x.RegionId)
+                 .FirstOrDefaultAsync();
+
+            return await _context.Users
+                .Where(x => x.DeletedDate == null && x.RegionId == regionId)
+                .Include(x => x.Region)
+                .ToListAsync();
+        }
+
         public async Task<User> GetByFilterAsync(Expression<Func<User, bool>> filter)
         {
             var user=await _context.Users.Where(filter)

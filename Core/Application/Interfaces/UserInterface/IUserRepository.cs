@@ -15,7 +15,9 @@ namespace Application.Interfaces.UserInterface
         Task<List<GetAllUserByEventIdQueryResult>> GetAllUserByEventUserId(int eventId);
 
         Task<User> GetByFilterAsync(Expression<Func<User, bool>> filter); //şimdilik login işlemi için kullanacağım
-        //tabiki bu kullanım filitre olduğu için farklı parametrelere göre de listeleyebilirim
+                                                                          //tabiki bu kullanım filitre olduğu için farklı parametrelere göre de listeleyebilirim
+
+        Task<List<User>> GetAllUserByRegionId(string regionName);
 
 
     }

@@ -33,7 +33,7 @@
                         <h5 class="text-secondary"><i class="bi bi-people"></i> Kullanıcı Listesi</h5>
                         <div class="card border-0 shadow-sm">
                             <div class="card-body scrollable-list">
-                                @await Component.InvokeAsync("_AdminEventGetAllUserForSpesicifRegionComponentPartial")
+                                @await Component.InvokeAsync("_AdminEventGetAllUserForSpesicifRegionComponentPartial", new {regionName=ViewBag.RegionName})
                             </div>
                         </div>
                     </div>

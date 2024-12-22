@@ -26,6 +26,16 @@
 
   @model List<ResultAllUserForVisibleEvent>
 
+<div class="card my-2">
+    <div class="card-body">
+        <input name="region" id="regionInput" class="form-control" placeholder="Arama Yapmak İstediğiniz Bölge (Şehir) İsmini Giriniz!" />
+        <button type="button" class="btn btn-success detail-button" onclick="redirectToEvent()">
+            Kullanıcıları Getir
+        </button>
+    </div>
+</div>
+
+
 <div class="row">
     @foreach (var user in Model)
     {
@@ -39,3 +49,17 @@
         </div>
     }
 </div>
+
+
+<script>
+    function redirectToEvent() {
+        var regionName = document.getElementById('regionInput').value.trim(); // Input değerini al ve boşlukları temizle
+
+        if (regionName) { // Eğer regionName boş değilse
+            var url = '/Admin/AdminEvent/CreateVisibleEvent/' + encodeURIComponent(regionName); // URL'yi oluştur, şehir ismini encode et
+            window.location.href = url; // Kullanıcıyı yeni URL'ye yönlendir
+        } else {
+            alert("Lütfen geçerli bir bölge ismi giriniz."); // Eğer input boşsa uyarı ver
+        }
+    }
+</script>
