@@ -14,5 +14,7 @@ namespace Application.Features.Mediatr.EventUsers.Commands
         public int UserId { get; set; }
 
         public string Status { get; set; }
+
+        public string? RejectedReason { get; set; }
     }
 }

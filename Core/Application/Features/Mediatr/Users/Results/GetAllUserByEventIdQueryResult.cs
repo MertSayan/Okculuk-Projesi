@@ -18,5 +18,6 @@ namespace Application.Features.Mediatr.Users.Results
         public string Status { get; set; }
         
         public DateTime BasvuruZamani {  get; set; }
+        public string RejectedReason { get; set; }
     }
 }

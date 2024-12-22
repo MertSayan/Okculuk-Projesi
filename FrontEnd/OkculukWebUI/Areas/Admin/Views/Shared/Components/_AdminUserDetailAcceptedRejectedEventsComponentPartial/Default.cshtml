@@ -13,9 +13,10 @@
                                 <th>EtkinlikId</th>
                                 <th>Başlık</th>
                                 <th>Açıklama</th>
-                                <th>Aktif Mi</th>
+                                @* <th>Aktif Mi</th> *@
                                 <th>Tarih ve Saat</th>
                                 <th>Kabul Durumu</th>
+                                <th>Red Sebep</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -23,9 +24,10 @@
                                 <th>EtkinlikId</th>
                                 <th>Başlık</th>
                                 <th>Açıklama</th>
-                                <th>Aktif Mi</th>
+                                @* <th>Aktif Mi</th> *@
                                 <th>Tarih ve Saat</th>
                                 <th>Kabul Durumu</th>
+                                <th>Red Sebep</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -40,9 +42,10 @@
                                     <td>@item.EventId</td>
                                     <td>@item.Title</td>
                                     <td>@item.Description</td>
-                                    <td>@item.IsActive</td>
+                                   @*  <td>@item.IsActive</td> *@
                                     <td>@item.DateAndTime</td>
                                     <td>@item.Status</td>
+                                    <td>@item.RejectedReason</td>
                                     <td>
                                         <button class="btn btn-success detail-button" data-url="/Admin/AdminEvent/Detail/@item.EventId">
                                             Detayı Görüntüle

@@ -8,5 +8,6 @@
         public bool IsActive { get; set; }
         public DateTime DateAndTime { get; set; }
         public string Status { get; set; }
+        public string RejectedReason { get; set; }
     }
 }

@@ -15,6 +15,7 @@ namespace Application.Features.Mediatr.Events.Results
         public DateTime DateAndTime { get; set; }
 
         public string Status { get; set; }
+        public string RejectedReason { get; set; }
 
 
     }

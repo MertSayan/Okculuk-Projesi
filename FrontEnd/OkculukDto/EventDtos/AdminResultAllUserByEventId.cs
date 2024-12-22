@@ -10,5 +10,7 @@
             public string Email { get; set; }
             public string Status { get; set; }
             public DateTime BasvuruZamani { get; set; }
+            public string RejectedReason { get; set; }
+
     }
 }

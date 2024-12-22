@@ -27,6 +27,7 @@ namespace Application.Features.Mediatr.EventUsers.Handlers.Write
                 EventId=request.EventId,
                 UserId=request.UserId,
                 Status=request.Status,
+                RejectedReason=request.RejectedReason,
             });
         }
     }

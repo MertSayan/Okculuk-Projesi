@@ -51,6 +51,7 @@ namespace Persistence.Repositories.EventRepositories
                    EventId=x.Event.EventId,
                    IsActive=x.Event.IsActive,
                    Status = x.Status,
+                   RejectedReason=x.RejectedReason
                 })
                 .ToListAsync();
         }

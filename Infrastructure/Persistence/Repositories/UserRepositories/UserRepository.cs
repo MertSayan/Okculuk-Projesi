@@ -48,7 +48,8 @@ namespace Persistence.Repositories.UserRepositories
                      PhoneNumber=x.User.PhoneNumber,
                      RoleName=x.User.Role.RoleName,
                      Status=x.Status,
-                     BasvuruZamani=x.BasvuruZamanı
+                     BasvuruZamani=x.BasvuruZamanı,
+                     RejectedReason=x.RejectedReason
                  }).ToListAsync();
                  
         }

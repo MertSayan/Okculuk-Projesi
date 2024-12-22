@@ -16,5 +16,7 @@ namespace Domain
         public DateTime BasvuruZamanı { get; set; }
         public string Status { get; set; } = "Pending"; // "Pending", "Approved", "Rejected"
 
+        public string? RejectedReason { get; set; }
+
     }
 }
