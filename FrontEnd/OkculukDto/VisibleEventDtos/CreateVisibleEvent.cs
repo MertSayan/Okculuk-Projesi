@@ -8,7 +8,7 @@ namespace OkculukDto.VisibleEventDtos
 {
     public class CreateVisibleEvent
     {
-        public int EventId { get; set; }
+        public List<int> EventId { get; set; }
         public List<int> UserId { get; set; }
     }
 }

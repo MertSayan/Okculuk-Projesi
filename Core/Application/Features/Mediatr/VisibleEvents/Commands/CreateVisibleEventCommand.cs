@@ -9,7 +9,7 @@ namespace Application.Features.Mediatr.VisibleEvents.Commands
 {
     public class CreateVisibleEventCommand:IRequest
     {
-        public int EventId { get; set; }
+        public List<int> EventId { get; set; }
         public List<int> UserId { get; set; }
     }
 }

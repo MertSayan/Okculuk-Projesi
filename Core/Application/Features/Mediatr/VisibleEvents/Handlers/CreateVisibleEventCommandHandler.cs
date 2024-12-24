@@ -5,7 +5,6 @@ using MediatR;
 
 namespace Application.Features.Mediatr.VisibleEvents.Handlers
 {
-
     public class CreateVisibleEventCommandHandler : IRequestHandler<CreateVisibleEventCommand>
     {
         private readonly IVisibleEventRepository _visibleEventRepository;
@@ -17,17 +16,19 @@ namespace Application.Features.Mediatr.VisibleEvents.Handlers
 
         public async Task Handle(CreateVisibleEventCommand request, CancellationToken cancellationToken)
         {
-            foreach (var userId in request.UserId)
+            foreach (var eventId in request.EventId)
             {
-                var visibleEvent = new VisibleEvent
+                foreach (var userId in request.UserId)
                 {
-                    EventId = request.EventId,
-                    UserId = userId,
-                };
+                    var visibleEvent = new VisibleEvent
+                    {
+                        EventId = eventId,
+                        UserId = userId,
+                    };
 
-                await _visibleEventRepository.CreateVisibleEvent(visibleEvent);
+                    await _visibleEventRepository.CreateVisibleEvent(visibleEvent);
+                }
             }
         }
     }
-
 }
