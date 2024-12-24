@@ -1,4 +1,4 @@
-﻿@model List<AdminResultAllUser>
+﻿@model List<ResultPagedUser>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
@@ -18,21 +18,25 @@
                         <thead>
                             <tr>
                                 <th>UserId</th>
-                                <th>Name</th>
-                                <th>Surname</th>
-                                <th>Email</th>
-                                <th>Phone</th>
+                                <th>Ad</th>
+                                <th>Soyad</th>
+                                <th>Mail</th>
+                                <th>Telefon</th>
                                 <th>Rol</th>
+                                <th>Bölge</th>
+                                <th>Kurumu</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>UserId</th>
-                                <th>Name</th>
-                                <th>Surname</th>
-                                <th>Email</th>
-                                <th>Phone</th>
+                                <th>Ad</th>
+                                <th>Soyad</th>
+                                <th>Mail</th>
+                                <th>Telefon</th>
                                 <th>Rol</th>
+                                <th>Bölge</th>
+                                <th>Kurumu</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -45,13 +49,26 @@
                                     <td>@item.Email</td>
                                     <td>@item.PhoneNumber</td>
                                     <td>@item.RoleName</td>
+                                    <td>@item.RegionName</td>
+                                    @if (@item.InstitutionName == null)
+                                    {
+                                        <td>Girilmemiş</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@item.InstitutionName</td>
+                                    }
                                     <td>
                                         <button class="btn btn-danger delete-button" data-url="/Admin/AdminUser/Remove/@item.UserId">
                                             Sil
                                         </button>
+                                    </td>
+                                    <td>
                                         <button class="btn btn-warning update-button" data-url="/Admin/AdminUser/Update/@item.UserId">
                                             Güncelle
                                         </button>
+                                    </td>
+                                    <td>
                                         <button class="btn btn-success detail-button" data-url="/Admin/AdminUser/Detail/@item.UserId">
                                             Detayı Görüntüle
                                         </button>
@@ -64,5 +81,18 @@
             </div>
         </div>
     </div>
+    <nav>
+        <ul class="pagination">
+            <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="?pageNumber=@(ViewBag.CurrentPage - 1)&pageSize=@ViewBag.PageSize">Önceki</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?pageNumber=@ViewBag.CurrentPage&pageSize=@ViewBag.PageSize">@ViewBag.CurrentPage</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?pageNumber=@(ViewBag.CurrentPage + 1)&pageSize=@ViewBag.PageSize">Sonraki</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 

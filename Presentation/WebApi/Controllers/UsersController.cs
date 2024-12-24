@@ -56,7 +56,13 @@ namespace WebApi.Controllers
             var values = await _mediator.Send(new GetAllUserByRegionIdQuery(RegionName));
             return Ok(values);
         }
-
+        [HttpGet("GetPagedUser")]
+        public async Task<IActionResult> GetPagedUser(int PageNumber=1,int PageSize=3)
+        {
+            var values = await _mediator.Send(new GetPagedUserQuery(PageNumber,PageSize));
+            return Ok(values);
+        }
+        
         [HttpPost]
         public async Task<IActionResult> CreateUser(CreateUserCommand command)
         {

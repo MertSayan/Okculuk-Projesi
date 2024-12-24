@@ -148,6 +148,29 @@ namespace Persistence.Repositories.EventRepositories
             };
         }
 
+        public async Task<GetEventsCountByStatusAndEventIdQueryResult> GetEventsCountByStatusAndEventId(int eventId)
+        {
+            var acceptedCount = await _context.EventsAndUsers
+                .Where(eu => eu.EventId == eventId && eu.Status == "Accepted")
+                .CountAsync();
+
+            var rejectedCount = await _context.EventsAndUsers
+                .Where(eu => eu.EventId == eventId && eu.Status == "Rejected")
+                .CountAsync();
+
+            var pendingCount = await _context.EventsAndUsers
+                .Where(eu => eu.EventId == eventId && eu.Status == "Pending")
+                .CountAsync();
+
+            return new GetEventsCountByStatusAndEventIdQueryResult
+            {
+                AcceptedCount = acceptedCount,
+                RejectedCount = rejectedCount,
+                PendingCount = pendingCount
+            };
+        }
+
+
         public async Task RemoveEventAsync(Event eventt)
         {
             if(eventt.DeletedDate == null)

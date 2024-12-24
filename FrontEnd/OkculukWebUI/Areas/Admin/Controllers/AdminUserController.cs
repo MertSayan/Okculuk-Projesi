@@ -19,15 +19,17 @@ namespace OkculukWebUI.Areas.Admin.Controllers
         }
 
         [Route("Index")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 3)
         {
-            var client=_httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7082/api/Users");
-            if(responseMessage.IsSuccessStatusCode)
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync($"https://localhost:7082/api/Users/GetPagedUser?PageNumber={pageNumber}&PageSize={pageSize}");
+            if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData=await responseMessage.Content.ReadAsStringAsync();
-                var values=JsonConvert.DeserializeObject<List<AdminResultAllUser>>(jsonData);
-                return View(values);
+                var users=JsonConvert.DeserializeObject<List<ResultPagedUser>>(jsonData);
+                ViewBag.CurrentPage = pageNumber;
+                ViewBag.PageSize = pageSize;
+                return View(users);
             }
             return View();
         }

@@ -19,6 +19,8 @@ namespace Application.Interfaces.UserInterface
 
         Task<List<User>> GetAllUserByRegionId(string regionName);
 
+        Task<List<User>> GetPagedUserAsync(int pageNumber,int pageSize);
+
 
     }
 }

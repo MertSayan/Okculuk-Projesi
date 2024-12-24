@@ -24,6 +24,7 @@ namespace Application.Interfaces.EventInterface
         Task<List<GetAllEventByUserIdStatusQueryResult>> GetEventsByStatus(int userId, Expression<Func<EventUser, bool>> statusPredicate);
 
         Task<GetEventsCountByStatusAndUserIdQueryResult> GetEventsCountByStatusByUserId(int userId);
+        Task<GetEventsCountByStatusAndEventIdQueryResult> GetEventsCountByStatusAndEventId(int eventId);
 
         Task<List<GetAllPendingEventQueryResult>> GetAllPendingEvent();
 

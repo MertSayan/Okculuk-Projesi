@@ -58,6 +58,12 @@ namespace WebApi.Controllers
             var values = await _mediator.Send(new GetEventsCountByStatusAndUserIdQuery(userId));
             return Ok(values);
         }
+        [HttpGet("GetEventsCountByStatusAndEventId")]
+        public async Task<IActionResult> GetEventsCountByStatusAndEventId(int eventId)
+        {
+            var values = await _mediator.Send(new GetEventsCountByStatusAndEventIdQuery(eventId));
+            return Ok(values);
+        }
         [HttpGet("GetAllPendingEventForAdmin")]
         public async Task<IActionResult> GetAllPendingEventForAdmin()
         {

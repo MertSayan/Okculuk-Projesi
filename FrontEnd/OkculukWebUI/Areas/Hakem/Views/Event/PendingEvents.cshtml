@@ -7,7 +7,7 @@
 <div class="container-fluid p-4">
     <div class="card shadow">
         <!-- Başlık -->
-        <h2 class="card-title lead p-4 border-bottom bg-light text-center" style="font-weight: 600">
+        <h2 class="card-title lead p-4 border-bottom bg-light text-center fs-3" style="font-weight: 600">
             Onay Bekleyen Etkinlikler
         </h2>
         <!-- Scrollable İçerik -->
@@ -21,17 +21,17 @@
                     </div>
                     <!-- Sağ taraf içerik -->
                     <div>
-                        <h5 class="mb-2">
+                        <h5 class="mb-2 fs-4">
                             <a href="@Url.Action("EventDetails", "Event", new { id = item.EventId })"
                                class="text-decoration-none text-dark">
                                 @item.Title
                             </a>
                         </h5>
-                        <p class="card-text mb-1 small">@item.UserName tarafından oluşturuldu</p>
-                        <p class="card-text mb-0 small text-muted">
+                        <p class="card-text mb-1 small fs-5">@item.UserName tarafından oluşturuldu</p>
+                        <p class="card-text mb-0 small text-muted fs-6">
                             Tarih ve Saat: @item.DateAndTime
                         </p>
-                        <p class="card-text mb-0 small text-muted">
+                        <p class="card-text mb-0 small text-muted fs-6">
                             @item.Description.Substring(0, Math.Min(50, item.Description.Length))...
                         </p>
                     </div>
@@ -40,5 +40,3 @@
         </div>
     </div>
 </div>
-
-

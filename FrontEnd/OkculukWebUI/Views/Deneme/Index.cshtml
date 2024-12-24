@@ -1,0 +1,66 @@
+﻿@model List<OkculukWebUI.Controllers.UserDto>
+
+<div class="container mt-4">
+    <h2>Kullanıcı Listesi</h2>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Ad</th>
+                    <th>Soyad</th>
+                    <th>Telefon</th>
+                    <th>Rol</th>
+                    <th>Email</th>
+                    <th>Bölge</th>
+                    <th>Kurum</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.UserId</td>
+                        <td>@user.Name</td>
+                        <td>@user.Surname</td>
+                        <td>@user.PhoneNumber</td>
+                        <td>@user.RoleName</td>
+                        <td>@user.Email</td>
+                        <td>@user.RegionName</td>
+                        @if (user.InstitutionName == null)
+                        {
+                            <td>Girilmemiş</td>
+                        }
+                        else{
+                            <td>@user.InstitutionName</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- Sayfalama -->
+        <nav>
+            <ul class="pagination">
+                <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" href="?pageNumber=@(ViewBag.CurrentPage - 1)&pageSize=@ViewBag.PageSize">Önceki</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?pageNumber=@ViewBag.CurrentPage&pageSize=@ViewBag.PageSize">@ViewBag.CurrentPage</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?pageNumber=@(ViewBag.CurrentPage + 1)&pageSize=@ViewBag.PageSize">Sonraki</a>
+                </li>
+            </ul>
+        </nav>
+    }
+</div>

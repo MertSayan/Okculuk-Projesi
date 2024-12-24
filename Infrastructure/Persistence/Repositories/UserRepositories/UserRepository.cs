@@ -33,6 +33,20 @@ namespace Persistence.Repositories.UserRepositories
                 .ToListAsync();
         }
 
+        public async Task<List<User>> GetPagedUserAsync(int pageNumber, int pageSize)
+        {
+            return await _context.Users
+                .Where(x => x.DeletedDate == null)
+                .Include(x => x.Role)
+                .Include(x => x.Region)
+                .OrderBy(x => x.Region.RegionName) // Şehir isimlerine göre alfabetik sırala
+                .Skip((pageNumber - 1) * pageSize) // İlgili sayfa için kayıtları atla
+                .Take(pageSize) // Sayfa başına veriyi al
+                .ToListAsync();
+        }
+
+
+
         public async Task<List<GetAllUserByEventIdQueryResult>> GetAllUserByEventUserId(int eventId)
         {
             return await _context.EventsAndUsers
@@ -74,6 +88,8 @@ namespace Persistence.Repositories.UserRepositories
                 .FirstOrDefaultAsync();
             return user;
         }
+
+   
 
         public async Task<User> GetUserById(int id)
         {
@@ -133,5 +149,7 @@ namespace Persistence.Repositories.UserRepositories
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
         }
+
+       
     }
 }
