@@ -1,0 +1,74 @@
+﻿@model AdminResultEventsStatusCount
+
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-header">
+            <h5>Etkinlik Katılım Oranları</h5>
+        </div>
+        <div class="card-body">
+            <div class="chart-container" style="position: relative; height: 100%; width: 100%;">
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Model'den gelen veriler
+    const participationData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(new[] {
+        new { Label = "Accepted", Count = Model.AcceptedCount },
+        new { Label = "Rejected", Count = Model.RejectedCount },
+        new { Label = "Pending", Count = Model.PendingCount }
+        }));
+
+    // Verileri ayrıştır
+    const labels = participationData.map(data => data.Label);
+    const counts = participationData.map(data => data.Count);
+
+    // Pie Chart için ayarlar
+    const ctx = document.getElementById("pieChart").getContext("2d");
+    const pieChart = new Chart(ctx, {
+        type: "pie",
+        data: {
+            labels: labels, // Accepted, Rejected, Pending
+            datasets: [{
+                data: counts, // Veriler
+                backgroundColor: [
+                    "#28a745", // Accepted (Yeşil)
+                    "#dc3545", // Rejected (Kırmızı)
+                    "#ffc107"  // Pending (Sarı)
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true, // Container'a sığdırma
+            plugins: {
+                legend: {
+                    position: "bottom", // Legend konumu
+                    labels: {
+                        font: {
+                            size: 12 // Yazı boyutu
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (tooltipItem) {
+                            const value = tooltipItem.raw;
+                            return `${value} kişi`; // Katılımcı sayısı
+                        }
+                    }
+                }
+            },
+            layout: {
+                padding: {
+                    top: 10,
+                    bottom: 10
+                }
+            }
+        }
+    });
+</script>
