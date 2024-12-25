@@ -70,6 +70,12 @@ namespace WebApi.Controllers
             var values = await _mediator.Send(new GetAllPendingEventQuery());
             return Ok(values);
         }
+        [HttpGet("GetPagedEvent")]
+        public async Task<IActionResult> GetPagedEvent(int pageNumber=1,int pageSize=10)
+        {
+            var values = await _mediator.Send(new GetPagedEventQuery(pageNumber,pageSize));
+            return Ok(values);
+        }
         
         [HttpPost]
         public async Task<IActionResult> CreateEvent(CreateEventCommand command)

@@ -1,4 +1,4 @@
-﻿@model List<AdminResultAllEvent>
+﻿@model List<AdminResultPagedEvents>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
@@ -46,7 +46,13 @@
                                 <tr class="@rowClass">
                                     <td>@item.EventId</td>
                                     <td>@item.Title</td>
-                                    <td>@item.Description</td>
+                                    <td>
+                                        @(
+                                            item.Description.Length > 10
+                                            ? item.Description.Substring(0, 10) + "..."
+                                            : item.Description
+                                            )
+                                    </td>
                                     <td>@item.IsActive</td>
                                     <td>@item.UserName</td>
                                     <td>@item.DateAndTime</td>
@@ -74,5 +80,18 @@
             </div>
         </div>
     </div>
+    <nav>
+        <ul class="pagination">
+            <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                <a class="page-link" href="?pageNumber=@(ViewBag.CurrentPage - 1)&pageSize=@ViewBag.PageSize">Önceki</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?pageNumber=@ViewBag.CurrentPage&pageSize=@ViewBag.PageSize">@ViewBag.CurrentPage</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?pageNumber=@(ViewBag.CurrentPage + 1)&pageSize=@ViewBag.PageSize">Sonraki</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 

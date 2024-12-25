@@ -37,6 +37,17 @@ namespace Persistence.Repositories.EventRepositories
 
         }
 
+        public async Task<List<Event>> GetPagedEventAsync(int pageNumber, int pageSize)
+        {
+            return await _context.Events
+                .Where(x => x.DeletedDate == null)
+                .Include(x => x.User)
+                .OrderByDescending(x => x.CreatedDate)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
+
         public async Task<List<GetAllEventByUserIdQueryResult>> GetAllEventByUserId(int userId)
         {
 
@@ -197,5 +208,7 @@ namespace Persistence.Repositories.EventRepositories
             _context.Update(eventt);
             await _context.SaveChangesAsync();
         }
+
+        
     }
 }

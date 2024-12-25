@@ -19,7 +19,7 @@ namespace OkculukWebUI.Areas.Admin.Controllers
         }
 
         [Route("Index")]
-        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 3)
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 10)
         {
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync($"https://localhost:7082/api/Users/GetPagedUser?PageNumber={pageNumber}&PageSize={pageSize}");

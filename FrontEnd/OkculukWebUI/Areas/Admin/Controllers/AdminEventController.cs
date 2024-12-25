@@ -21,14 +21,16 @@ namespace OkculukWebUI.Areas.Admin.Controllers
         }
 
         [Route("Index")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNumber=1, int pageSize=10)
         {
             var client=_httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7082/api/Events");
+            var responseMessage = await client.GetAsync($"https://localhost:7082/api/Events/GetPagedEvent?pageNumber={pageNumber}&pageSize={pageSize}");
             if(responseMessage.IsSuccessStatusCode)
             {
                 var jsonData=await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<List<AdminResultAllEvent>>(jsonData);
+                var values = JsonConvert.DeserializeObject<List<AdminResultPagedEvents>>(jsonData);
+                ViewBag.CurrentPage = pageNumber;
+                ViewBag.PageSize = pageSize;
                 return View(values);
             }
 
