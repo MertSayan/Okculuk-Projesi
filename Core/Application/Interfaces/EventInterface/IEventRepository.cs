@@ -28,6 +28,6 @@ namespace Application.Interfaces.EventInterface
 
         Task<List<GetAllPendingEventQueryResult>> GetAllPendingEvent();
 
-        Task<List<Event>> GetPagedEventAsync(int pageNumber, int pageSize); 
+        Task<List<Event>> GetPagedEventAsync(int pageNumber, int pageSize);   
     }
 }
