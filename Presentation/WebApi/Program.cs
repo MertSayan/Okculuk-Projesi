@@ -1,6 +1,7 @@
 
 using Application.Interfaces.EventInterface;
 using Application.Interfaces.EventUserInterface;
+using Application.Interfaces.GoogleFormInterface;
 using Application.Interfaces.RegionInterface;
 using Application.Interfaces.RoleInterface;
 using Application.Interfaces.UserInterface;
@@ -13,6 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using Persistence.Context;
 using Persistence.Repositories.EventRepositories;
 using Persistence.Repositories.EventUserRepositories;
+using Persistence.Repositories.GoogleFormRepositories;
 using Persistence.Repositories.RegionRepositories;
 using Persistence.Repositories.RoleRepositories;
 using Persistence.Repositories.UserRepositories;
@@ -53,6 +55,7 @@ namespace WebApi
             builder.Services.AddScoped<IRoleRepository,RoleRepository>();
             builder.Services.AddScoped<IRegionRepository,RegionRepository>();
             builder.Services.AddScoped<IVisibleEventRepository,VisibleEventRepository>();
+            builder.Services.AddScoped<IGoogleFormRepository, GoogleFormRepository>();  
 
             builder.Services.AddSaveApplicationService();
 

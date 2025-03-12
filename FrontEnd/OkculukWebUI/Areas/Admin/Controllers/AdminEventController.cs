@@ -99,6 +99,7 @@ namespace OkculukWebUI.Areas.Admin.Controllers
             return View();
         }
 
+
         [HttpGet]
         [Route("CreateVisibleEvent/{regionName=null}")]
         public IActionResult CreateVisibleEvent(string regionName=null)
