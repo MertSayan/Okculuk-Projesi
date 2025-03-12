@@ -1,8 +1,56 @@
-﻿
+﻿@model CreateGoogleFormDto
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
 }
 
-<h1>Index</h1>
+<div class="container mt-4">
+    <div class="d-flex justify-content-center gap-3 mb-3">
+        <button class="btn btn-success btn-lg" id="toggleFormButton">Google Form Verilerini Getir</button>
+        <button class="btn btn-dark btn-lg" id="fillEventUserTableButton">Etkinlik-Kullanıcı Tablosunu Doldur</button>
+    </div>
 
+    <!-- Google Form ID Girişi için Form -->
+    <div id="formContainer" class="mb-3" style="display: none;">
+        <form method="post">
+            <div class="input-group">
+                <input type="text" class="form-control" asp-for="FormId" placeholder="Google Form ID girin" required>
+                <button type="submit" class="btn btn-primary">Gönder</button>
+            </div>
+        </form>
+    </div>
+
+    @await Component.InvokeAsync("_AdminMainGoogleFormDatasComponentPartial")
+</div>
+
+<script>
+    // Google Form giriş alanını aç/kapat butonu
+    document.getElementById("toggleFormButton").addEventListener("click", function () {
+        var formContainer = document.getElementById("formContainer");
+        formContainer.style.display = formContainer.style.display === "none" ? "block" : "none";
+    });
+
+    // Etkinlik-Kullanıcı Tablosunu Doldur butonuna tıklanınca AJAX isteği gönder
+    document.getElementById("fillEventUserTableButton").addEventListener("click", async function () {
+        try {
+            const response = await fetch("/Admin/AdminMain/Deneme", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            if (response.ok) {
+                alert("Tablo başarıyla dolduruldu!");
+                location.reload(); // Sayfayı yenileyerek güncellenmiş veriyi göster
+            } else {
+                alert("Bir hata oluştu.");
+            }
+        } catch (error) {
+            console.error("Hata oluştu:", error);
+            alert("Bir hata oluştu.");
+        }
+    });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>

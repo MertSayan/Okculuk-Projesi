@@ -48,6 +48,8 @@ namespace Application.Features.Mediatr.EventUsers.Handlers.Write
                 });
             }
 
+            await _googleFormRepository.DeleteDataTable();
+
             //await _eventUserRepository.CreateUserAsync(new EventUser
             //{
             //    BasvuruZamanı = DateTime.Now,

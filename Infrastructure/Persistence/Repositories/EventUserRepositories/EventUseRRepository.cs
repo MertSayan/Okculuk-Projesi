@@ -22,9 +22,21 @@ namespace Persistence.Repositories.EventUserRepositories
 
         public async Task CreateUserAsync(EventUser eventUser)
         {
-            eventUser.CreatedDate= DateTime.Now;    
-            _context.EventsAndUsers.Add(eventUser);
-            await _context.SaveChangesAsync();
+            bool exists = await _context.EventsAndUsers
+                       .AnyAsync(eu => eu.EventId == eventUser.EventId &&
+                                       eu.UserId == eventUser.UserId);
+            if (exists)
+            {
+                // Eğer kayıt varsa ekleme yapma
+                return;
+            }
+            else
+            {
+                eventUser.CreatedDate = DateTime.Now;
+                _context.EventsAndUsers.Add(eventUser);
+                await _context.SaveChangesAsync();
+            }
+           
         }
 
         public Task<List<EventUser>> GetAllEventUserAsync()

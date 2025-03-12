@@ -10,7 +10,7 @@ namespace Application.Interfaces.GoogleFormInterface
     public interface IGoogleFormRepository
     {
         Task<List<GoogleForm>> GetAllGoogleForm();
-        Task CreateGoogleForm(string id);
+        Task CreateGoogleForm(string Id);
         Task DeleteDataTable();
 
     }

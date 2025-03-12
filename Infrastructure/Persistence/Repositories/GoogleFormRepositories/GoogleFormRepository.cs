@@ -25,11 +25,11 @@ namespace Persistence.Repositories.GoogleFormRepositories
             return await _context.GoogleForms.ToListAsync();
         }
 
-        public async Task CreateGoogleForm(string id)
+        public async Task CreateGoogleForm(string Id)
         {
             string[] Scopes = { SheetsService.Scope.SpreadsheetsReadonly };
             string ApplicationName = "Google Sheets API Test";
-            string SpreadsheetId = $"{id}"; // Buraya kendi Google Sheets ID'ni yaz
+            string SpreadsheetId = $"{Id}"; // Buraya kendi Google Sheets ID'ni yaz
             string Range = "A2:F"; // Bütün verileri al
 
             GoogleCredential credential;
@@ -67,7 +67,7 @@ namespace Persistence.Repositories.GoogleFormRepositories
                         Name = row[2].ToString(),
                         Surname = row[3].ToString(),
                         IsJoin = row[4].ToString().Trim(),
-                        RejectedReason = row[5].ToString()
+                        RejectedReason = (row.Count > 5 && !string.IsNullOrWhiteSpace(row[5].ToString())) ? row[5].ToString() : "-"
                     };
 
                     yanitlar.Add(yanit);
@@ -77,6 +77,7 @@ namespace Persistence.Repositories.GoogleFormRepositories
                     Console.WriteLine($"Hata oluştu: {ex.Message}");
                 }
             }
+
 
             await _context.GoogleForms.AddRangeAsync(yanitlar);
             await _context.SaveChangesAsync();
