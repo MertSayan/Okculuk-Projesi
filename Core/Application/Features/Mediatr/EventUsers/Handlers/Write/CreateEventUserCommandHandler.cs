@@ -4,11 +4,6 @@ using Application.Interfaces.GoogleFormInterface;
 using Application.Interfaces.UserInterface;
 using Domain;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Mediatr.EventUsers.Handlers.Write
 {
@@ -32,20 +27,25 @@ namespace Application.Features.Mediatr.EventUsers.Handlers.Write
 
 
 
-            for(int i=0;i< values.Count;i++)
+            for (int i = 0; i < values.Count; i++)
             {
-
                 var user = await _userRepository.GetByFilterAsync(u => u.Name == values[i].Name && u.Surname == values[i].Surname);
 
-
-                await _eventUserRepository.CreateUserAsync(new EventUser
+                if (user != null)
                 {
-                    BasvuruZamanı = values[i].CreatedDate,
-                    EventId = values[i].EventId,
-                    UserId = user.UserId,
-                    Status = values[i].IsJoin,
-                    RejectedReason = values[i].RejectedReason,
-                });
+                    await _eventUserRepository.CreateUserAsync(new EventUser
+                    {
+                        BasvuruZamanı = values[i].CreatedDate,
+                        EventId = values[i].EventId,
+                        UserId = user.UserId,
+                        Status = values[i].IsJoin,
+                        RejectedReason = values[i].RejectedReason,
+                    });
+                }
+                else
+                {
+                    
+                }
             }
 
             await _googleFormRepository.DeleteDataTable();
